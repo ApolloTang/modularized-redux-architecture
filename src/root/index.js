@@ -6,10 +6,13 @@ import React, {Component} from 'react';
 
 // React router version v4
 import {
+    Route, Switch ,
   Link
 } from 'react-router-dom';
 
-import { Route, Switch } from 'react-router'
+// import {
+//     Route, Switch
+// } from 'react-router'
 
 
 import createBrowserHistory from 'history/createBrowserHistory'
