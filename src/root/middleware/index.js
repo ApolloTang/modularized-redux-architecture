@@ -1,20 +1,27 @@
-import thunk from 'redux-thunk';
-import createLogger from 'redux-logger';
+const PROD = (process && process.env && process.env.PROD === true);
 
-import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
-const PROD = (process && process.env && process.env.PROD) ? true : false;
+import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { routerMiddleware } from 'connected-react-router';
 
-const middleware = [ thunk ];
+const middleware = [
+    thunk,
+    routerMiddleware(history), // for dispatching history actions
+];
 
-if (PROD) {
-} else {
+// if (PROD) {
+//     middleware.push(
+//         createLogger()
+//     );
+// }
+
+if (!PROD) {
     middleware.push(
-        routerMiddleware(history), // for dispatching history actions
         createLogger()
-    )
+    );
 }
 
 export default middleware;
