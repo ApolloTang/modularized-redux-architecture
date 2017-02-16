@@ -1,32 +1,18 @@
-if (process && process.env && process.env.CONSOLE_LOG) {
-    console.info('log from file: modules/root/index.js'); // eslint-disable-line no-console
-}
+const DEBUG = (process && process.env && process.env.debug === true)
 
 import React from 'react';
 import config from './config';
-import { saveState as saveStateToLocalStorage } from './local-storage';
-
-window.addEventListener("beforeunload", function (e) {
-    if (config.shouldPersistStoreState) {
-        saveStateToLocalStorage( store.getState() );
-        return null;
-    }
-
-    (e || window.event).returnValue = null;
-    return null;
-    // http://stackoverflow.com/questions/7255649/window-onbeforeunload-not-working
-});
-
-
-import style from './style';
-import { Provider } from 'react-redux';
 import store from './store';
+import { Provider } from 'react-redux';
+
 import { ConnectedRouter } from 'connected-react-router';
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import App from 'modules/app';
 import {routes, navigationDirective} from './routes';
 import SimpleNavigation from 'widgets/simple-navigation';
+
+import style from './style';
 
 const Root = ()=>(
     <div className={`root ${style['module-style']}`}>
@@ -41,6 +27,6 @@ const Root = ()=>(
     </div>
  );
 
+
 export default Root;
-export {navigations};
 

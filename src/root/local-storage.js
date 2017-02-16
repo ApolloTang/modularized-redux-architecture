@@ -1,8 +1,11 @@
-const persisedStateName = 'store';
+import config from './config';
+import store from './store';
 
-export const loadState = () => {
+const PERSISED_STATE_NAME = 'store';
+
+const loadState = () => {
     try {
-        const serializedState = localStorage.getItem(persisedStateName);
+        const serializedState = localStorage.getItem(PERSISED_STATE_NAME);
         if (serializedState === null) {
             return undefined;
         }
@@ -13,11 +16,13 @@ export const loadState = () => {
     }
 };
 
-export const saveState = (state) => {
+const saveState = (state) => {
     try {
         const serializedState = JSON.stringify(state);
-        localStorage.setItem(persisedStateName, serializedState);
+        localStorage.setItem(PERSISED_STATE_NAME, serializedState);
     } catch (err) {
         // Ignore write errors.
     }
 };
+
+export {saveState, loadState};
