@@ -39,10 +39,9 @@ class TodoListFilterSettingCtrl extends Component {
         const path = this.path;
         if (path) {
             const navigateTo = `${path}/${this.props.filterType}`;
-            console.log('navigateTo: ', navigateTo)
 
-            history.push(navigateTo);
-            // this.props.dispatch_navigate(navigateTo)
+            // history.push(navigateTo);
+            this.props.dispatch_navigate(navigateTo)
         }
     }
 
