@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import style from './style';
 const ModuleRoot = ({navigations}) => (
@@ -7,7 +7,14 @@ const ModuleRoot = ({navigations}) => (
         <ul>
             {
                 navigations.map((n,i)=>(
-                    <li key={i}> <Link to={n.to}> {n.displayText} </Link> </li>
+                    <li key={i}>
+                        <NavLink
+                            exact
+                            to={n.to}
+                            activeClassName="is-active" >
+                            {n.displayText}
+                        </NavLink>
+                    </li>
                 ))
             }
         </ul>
