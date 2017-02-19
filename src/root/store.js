@@ -5,9 +5,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import rootReducer from './reducers';
 import middleware from  './middleware';
 
-import { createBrowserHistory } from 'history';
-const history = createBrowserHistory();
-
+import {history} from 'root/createHistory';
 import { connectRouter } from 'connected-react-router';
 
 import { saveState, loadState as loadPersistedState } from './local-storage';

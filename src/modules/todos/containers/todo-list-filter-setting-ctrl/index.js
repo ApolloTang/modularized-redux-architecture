@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { browserHistory } from 'react-router';
-
 import {connect} from 'react-redux';
+
 import { push } from 'connected-react-router'
+import {history} from 'root/createHistory';
+
 import {mapStoreToProps, mapDispatchToProps} from './selector';
 import style from './style';
 
@@ -37,17 +38,19 @@ class TodoListFilterSettingCtrl extends Component {
     handleNavigate() {
         const path = this.path;
         if (path) {
-            // browserHistory.push(`${path}/${this.props.filterType}`);
             const navigateTo = `${path}/${this.props.filterType}`;
             console.log('navigateTo: ', navigateTo)
-            console.log('this,props ', this.props)
-            this.props.dispatch_navigate(navigateTo)
+
+            history.push(navigateTo);
+            // this.props.dispatch_navigate(navigateTo)
         }
     }
 
     render() {
         const paramsFilterType = _.get(this.props, `params.filterType`, void 0);
         const ownFilterType = this.props.filterType;
+        // console.log('ownFilterType: ', ownFilterType)
+        // console.log('paramsFilterType: ', paramsFilterType)
         const isActive =
             ((ownFilterType === paramsFilterType) ||
             ((paramsFilterType === void 0) && (ownFilterType === 'all')) )
