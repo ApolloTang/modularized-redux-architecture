@@ -1,7 +1,5 @@
-const DEBUG = (process && process.env && process.env.debug === true)
 
 import React from 'react';
-import config from './config';
 import store from './store';
 import { Provider } from 'react-redux';
 
@@ -26,7 +24,6 @@ const Root = ()=>(
         </Provider>
     </div>
  );
-
 
 export default Root;
 

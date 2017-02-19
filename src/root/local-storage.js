@@ -1,4 +1,3 @@
-import config from './config';
 import store from './store';
 
 const PERSISED_STATE_NAME = 'store';

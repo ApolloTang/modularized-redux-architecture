@@ -1,5 +1,5 @@
 import config from './config';
-const PROD = (process && process.env && process.env.PROD === true);
+const {PROD, shouldPersistStoreState } = config;
 
 import {createStore, applyMiddleware, compose} from 'redux';
 import rootReducer from './reducers';
@@ -17,8 +17,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
 let store;
+
+// Production
 if (PROD) {
-    if (config.shouldPersistStoreState && preloadedState) {
+    if (shouldPersistStoreState && preloadedState) {
         store = createStore(
             connectRouter(history)(rootReducer),
             preloadedState,
@@ -30,8 +32,11 @@ if (PROD) {
             applyMiddleware(...middleware)
         );
     }
-} else {
-    if (config.shouldPersistStoreState && preloadedState) {
+}
+
+// Development
+if (!PROD) {
+    if (shouldPersistStoreState && preloadedState) {
         store = createStore(
             connectRouter(history)(rootReducer),
             preloadedState,
@@ -51,18 +56,15 @@ if (PROD) {
 
 
 window.addEventListener('beforeunload', cb_saveStateToLocalStorage);
-
 export default store;
 
 
 
 function cb_saveStateToLocalStorage(e) {
-    if (config.shouldPersistStoreState) {
+    if (shouldPersistStoreState) {
         saveState( store.getState() );
         return null;
     }
-
-    (e || window.event).returnValue = null;
     return null;
     // http://stackoverflow.com/questions/7255649/window-onbeforeunload-not-working
 };
