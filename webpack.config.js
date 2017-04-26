@@ -75,7 +75,7 @@ const config_fn = env => {                                                  // [
                     {
                         test: /\.(less|css)$/,                               // [41]
                         loader: ExtractTextPlugin.extract({                  // [19]
-                            fallbackLoader: 'style-loader',
+                            fallback: 'style-loader',
                             loader: 'css-loader!less-loader'                 // [37][42]
                         }),
                         include: absolutePath_sourceFolder
