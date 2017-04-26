@@ -4,6 +4,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 import FontTest from 'modules/font-test';
 import LazyLoad from 'modules/lazy-load';
 import Todos from 'modules/todos';
+import Rest from 'modules/rest-testing';
 
 
 const navigationDirective = [
@@ -11,6 +12,7 @@ const navigationDirective = [
     {to:'/font-test', displayText:'Font test'},
     {to:'/lazy-load', displayText:'Lazy load'},
     {to:'/todos/all', displayText:'Todo'},
+    {to:'/rest', displayText:'Rest'},
 ];
 
 
@@ -20,6 +22,7 @@ const routes = (
         <Route path="/font-test" component={FontTest} />
         <Route path="/lazy-load" component={LazyLoad} />
         <Route path="/todos/:filterType" component={Todos} />
+        <Route path="/rest" component={Rest} />
     </Switch>
 );
 
