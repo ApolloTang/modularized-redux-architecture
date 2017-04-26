@@ -1,10 +1,10 @@
 {
-  "name": "redux-todo",
+  "name": "React-Project-Setup",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose --watch",
     "start": "npm run build && node server",
     "dev": "webpack-dev-server --env.dev --no-info",
     "dev:info": "webpack-dev-server --env.dev",
@@ -24,17 +24,24 @@
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-es2016": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
     "css-loader": "^0.26.1",
+    "enzyme": "^2.8.2",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.26.0",
+    "identity-obj-proxy": "^3.0.0",
     "inline-manifest-webpack-plugin": "^3.0.1",
+    "jest": "^19.0.2",
+    "jest-enzyme": "^3.0.1",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
     "progress-bar-webpack-plugin": "^1.9.3",
+    "react-test-renderer": "^15.5.4",
     "redux-logger": "^2.7.4",
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
@@ -44,7 +51,6 @@
   },
   "dependencies": {
     "connected-react-router": "4.1.0",
-    "extract-text-webpack-plugin": "^2.1.0",
     "lodash": "^4.17.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -52,5 +58,20 @@
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   }
 }
