@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "jest --verbose --watch",
-    "start": "npm run build && node server",
+    "start": "yarn run build && node server.js",
     "dev": "webpack-dev-server --env.dev --no-info",
     "dev:info": "webpack-dev-server --env.dev",
     "dev:debug": "CONSOLE_LOG=true webpack-dev-server --env.dev --no-info --define process.env.debug='true'",
@@ -19,7 +19,7 @@
     "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug"
   },
   "keywords": [],
-  "author": "",
+  "author": "Apollo Tang",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.22.1",
