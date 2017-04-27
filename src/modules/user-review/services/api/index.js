@@ -10,7 +10,7 @@ const userCatelog = {
       .get(`${rootURL}/users`)
       .then(
         users => { store.dispatch( {
-            type: 'system',
+            type: 'resources_userCatelog_update',
             payload: {users}
           });
           return users;

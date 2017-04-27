@@ -10,22 +10,22 @@ const initialState = {
 
 const userCatelog = (state = {...initialState}, action) => {
   switch (action.type) {
-    case `${nameSpace}__userCatlog_init`: {
+    case `${nameSpace}__userCatelog_init`: {
       return { ...state, }
       }
-    case `${nameSpace}__userCatlog_fetch`: {
+    case `${nameSpace}__userCatelog_fetch`: {
       const nextState = {
         ...state
       }
       return nextState;
     }
-    case `${nameSpace}__userCatlog_fetch_success`: {
+    case `${nameSpace}__userCatelog_fetch_success`: {
       const nextState = {
         ...state
       }
       return nextState;
     }
-    case `${nameSpace}__userCatlog_fetch_fail`: {
+    case `${nameSpace}__userCatelog_fetch_fail`: {
     }
     default: {
       return state

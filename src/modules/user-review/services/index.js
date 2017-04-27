@@ -1,17 +1,19 @@
 import _ from 'lodash';
+
+import c from '../../common/actions-names';
+import {nameSpace} from '../../config';
 import store from 'root/store';
 import createHttp from 'util/http';
-import c from '../../common/actions-name';
-
 
 const rootURL = `localhost:3000`;
+
 const userCatelog = {
   getAll: ()=>{
     return createHttp()
       .get(`${rootURL}/users`)
       .then(
         users => { store.dispatch( {
-            type: 'system',
+            type: `${nameSpace}__resources_userCatelog_update`,
             payload: {users}
           });
           return users;

@@ -7,7 +7,7 @@ const userCatelog = {
   init() {
     return (dispatch, getState) => {
       dispatch({
-        type: `${nameSpace}__userCatlog_init`,
+        type: `${nameSpace}__userCatelog_init`,
       });
       API.userCatelog.getAll();
     }

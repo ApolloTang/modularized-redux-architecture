@@ -1,13 +1,16 @@
 import _ from 'lodash';
+import {combineReducers} from 'redux';
+
 import c from '../common/actions-names';
 import {nameSpace} from '../config';
-import {combineReducers} from 'redux';
 
 import userCatelog from '../containers/user-catelog/reducer';
 
 const session = combineReducers( {
   userCatelog
 });
+
+import resources from './resources';
 
 const moduleRoot = combineReducers({
   session,
@@ -27,9 +30,7 @@ const moduleRoot = combineReducers({
   //     ...state_next,
   //   }
   // },
-  resources: (state={note:'resources'}, action)=>{
-    return {...state};
-  },
+  resources
 });
 
 export default moduleRoot;

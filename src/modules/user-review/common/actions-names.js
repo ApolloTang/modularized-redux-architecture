@@ -1,14 +1,19 @@
 import {nameSpace} from  '../config';
 
 const userCatlog = [
-  'userCatlog_init',
-  'userCatlog_fetch',
-  'userCatlog_fetch_success',
-  'userCatlog_fetch_fail',
-  'userCatlog_select'
+  'userCatelog_init',
+  'userCatelog_fetch',
+  'userCatelog_fetch_success',
+  'userCatelog_fetch_fail',
+  'userCatelog_select',
+];
+
+const resources = [
+  'resources_userCatelog_update',
 ];
 
 const symbols = [
+  ...resources,
   ...userCatlog,
   'add',
   'remove',
