@@ -1,6 +1,7 @@
 import c from '../../common/actions-names';
 import {nameSpace} from '../../config';
 
+import API from '../../services/api';
 
 const userCatelog = {
   init() {
@@ -8,6 +9,7 @@ const userCatelog = {
       dispatch({
         type: `${nameSpace}__userCatlog_init`,
       });
+      API.userCatelog.getAll();
     }
   }
 }
