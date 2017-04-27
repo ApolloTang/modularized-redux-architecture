@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import Layout from './layout';
+import Layout from './components/layout/';
+import UserCatelog from './containers/user-catelog/';
+
 import routes from './routes';
 
 import { Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
@@ -45,7 +47,7 @@ class ModuleRoot extends Component {
     return (
       <Layout
         className={`user-review ${style['module-style']}`}
-        UserCatelog={<UserCat/>}
+        UserCatelog={<UserCatelog/>}
         Navigation={<Navigation userId={this.props.match.params.userId}/>}
         routes={routes}
         />

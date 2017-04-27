@@ -1,15 +1,17 @@
 import {combineReducers} from 'redux';
 
 import todos from  'modules/todos/reducers';
+import userReview from  'modules/user-review/reducers';
 
 const modules = combineReducers({
-    todos
+  todos,
+  userReview
 });
 
 const rootReducer = combineReducers({
-    modules,
-    // resources: AppReducer,
-    // sessions: {}
+  modules,
+  // resources: AppReducer,
+  // sessions: {}
 })
 
 export default rootReducer;

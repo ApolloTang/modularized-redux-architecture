@@ -4,5 +4,5 @@ const PROD = (process && process.env && process.env.prod === true)
 export default {
     DEBUG,
     PROD,
-    shouldPersistStoreState: true
+    shouldPersistStoreState: false
 }
