@@ -2,14 +2,13 @@ import _ from 'lodash';
 import store from 'root/store';
 import {createHttp} from 'util/rest';
 import c from '../../common/actions-names';
-import {nameSpace} from '../../config';
+import {nameSpace, rootUrl} from '../../config';
 
-const rootURL = `http://localhost:3000/api`;
 
 const userCatelog = {
   getAll() {
     return createHttp
-      .get(`${rootURL}/users`)
+      .get(`${rootUrl}/users`)
       .then(
         userCatelog => {
           store.dispatch( {
