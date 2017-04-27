@@ -1,7 +1,11 @@
-if (process && process.env && process.env.CONSOLE_LOG) {
-    console.info('log from file: src/util/helper.js'); // eslint-disable-line no-console
-}
+import _ from 'lodash';
 
-function doHeavyLifting () { return 'done heavy lifting.' }
+const array_to_IndexirizedObj = (resources_arrays) => {
+  const out = _(resources_arrays).reduce( (acc, item) => {
+    acc[item._id] = item;
+    return acc;
+  }, {});
+  return out;
+};
 
-export {doHeavyLifting};
+export {array_to_IndexirizedObj};
