@@ -13,6 +13,9 @@ const mapStoreToProps = store=>{
 
 const mapDispatchToProps = dispatch => ({
   dispatch_init() { dispatch(Action.init() ) },
+  dispatch_selectUser(userId) {
+    dispatch(Action.selectUser(userId) )
+  },
   dispatch_someAction() { dispatch( Action_someAction() ); }
 });
 

@@ -5,7 +5,7 @@ const userCatlog = [
   `userCatelog_fetch_begin`,
   'userCatelog_fetch_success',
   'userCatelog_fetch_fail',
-  'userCatelog_select',
+  'userCatelog_selectUser',
 ];
 
 const resources = [

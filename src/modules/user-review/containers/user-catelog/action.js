@@ -27,6 +27,16 @@ const userCatelog = {
 
       );
     }
+  },
+
+  selectUser(userId) {
+    return (dispatch, getState) => {
+      console.log('dispatch selection user: ', userId)
+      dispatch({
+        type: c[`${nameSpace}__userCatelog_selectUser`],
+        payload: {userId}
+      });
+    }
   }
 }
 
