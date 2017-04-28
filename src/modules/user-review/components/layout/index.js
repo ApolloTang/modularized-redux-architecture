@@ -14,7 +14,7 @@ class Layout extends Component {
             <div className={`layout ${style['module-style']}`} >
               <div>{this.props.UserCatelog}</div>
               <div>
-                <div>{this.props.Navigation}</div>
+                <div>{this.props.FunctionNavigation}</div>
                 <div>{this.props.routes}</div>
               </div>
             </div>
