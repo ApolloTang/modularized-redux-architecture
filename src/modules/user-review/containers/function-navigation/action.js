@@ -7,6 +7,6 @@ import API from '../../services/api';
 const functionNavigation = {
 }
 
-export default userCatelog;
+export default functionNavigation;
 
 

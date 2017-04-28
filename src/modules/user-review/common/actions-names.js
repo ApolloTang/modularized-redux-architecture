@@ -8,13 +8,18 @@ const userCatlog = [
   'userCatelog_selectUser',
 ];
 
+import userView from '../containers/user-view/action-names';
+
+/* move the following const to reducers/resources? */
 const resources = [
   'resources_userCatelog_update',
+  'resources_users_update',
 ];
 
 const symbols = [
   ...resources,
   ...userCatlog,
+  ...userView
 ].reduce((acc, eventName) => ({
   ...acc,
   [`${nameSpace}__${eventName}`]: acc[eventName] ? duplicateEventNameError(eventName) : Symbol.for(`${nameSpace}__${eventName}`)

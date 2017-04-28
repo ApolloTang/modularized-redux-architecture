@@ -1,12 +1,8 @@
 import React from 'react';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+import UserView from './containers/user-view';
 
-const Users_view = (props)=>{
-  console.log('users_view: ', props)
-  return (
-    <div>Users_view {props.match.params.userId}</div>
-  )
-}
+
 const GiveReview = (props)=>{
   console.log('GiveReview: ', props)
   const userId = props.match.params.userId;
@@ -36,7 +32,7 @@ const viewReview = (props)=>{
 const routes = (
   <Switch>
     <Route exact path="/users" component={()=>(<div>users</div>)} />
-    <Route exact path="/users/:userId/" component={Users_view} />
+    <Route exact path="/users/:userId/" component={(props)=><UserView {...props}/>} />
     <Route exact path="/users/:userId/view-review/:targetId" component={viewReview} />
     <Route exact path="/users/:userId/view-review/" component={viewReview} />
     <Route exact path="/users/:userId/give-review/:targetId" component={GiveReview} />

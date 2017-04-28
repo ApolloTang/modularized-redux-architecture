@@ -15,8 +15,8 @@ class ModuleRoot extends Component {
   }
   render() {
 
-    console.log('user-review props: ', this.props)
-    console.log('user-review FunctionNavigation: ', FunctionNavigation)
+    // console.log('user-review props: ', this.props)
+    // console.log('user-review FunctionNavigation: ', FunctionNavigation)
     return (
       <Layout
         className={`user-review ${style['module-style']}`}

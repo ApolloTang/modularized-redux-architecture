@@ -1,0 +1,49 @@
+import c from '../../common/actions-names';
+import {nameSpace} from '../../config';
+
+import API from '../../services/api';
+
+
+const userView = {
+  init(userId) {
+    return (dispatch, getState) => {
+      dispatch({
+        type: c[`${nameSpace}__userView_init`],
+      });
+
+      dispatch({
+        type: c[`${nameSpace}__userView_fetch_begin`],
+      });
+      API.users.getOne(userId).then(
+        user=>{
+          setTimeout( ()=>{
+            dispatch({
+              type: c[`${nameSpace}__userView_fetch_success`],
+            });
+          }, 2000)
+        },
+        err=>{
+          dispatch({
+            type: c[`${nameSpace}__userView_fetch_fail`],
+            error: err
+          });
+        },
+
+      );
+    }
+  },
+
+  // selectUser(userId) {
+  //   return (dispatch, getState) => {
+  //     console.log('dispatch selection user: ', userId)
+  //     dispatch({
+  //       type: c[`${nameSpace}__userCatelog_selectUser`],
+  //       payload: {userId}
+  //     });
+  //   }
+  // }
+}
+
+export default userView;
+
+
