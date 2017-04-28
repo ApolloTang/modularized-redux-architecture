@@ -1,10 +1,14 @@
+import _ from 'lodash';
 import Action from './action';
-
-console.log('xxxxx Action: ', Action);
+import {nameSpace} from '../../config';
 
 const mapStoreToProps = store=>{
-  console.log('xxxx user-catlog: selector: ', store);
-  return store;
+  const userCatelog = _.get(store, `modules.${nameSpace}.resources.userCatelog`, null);
+  const isLoading = _.get(store, `modules.${nameSpace}.session.userCatelog.isLoading`, true);
+  return {
+    userCatelog,
+    isLoading
+  }
 };
 
 const mapDispatchToProps = dispatch => ({

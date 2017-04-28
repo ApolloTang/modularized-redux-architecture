@@ -12,9 +12,10 @@ const userCatelog = {
       .then(
         userCatelog => {
           store.dispatch( {
-            type: `${nameSpace}__resources_userCatelog_update`,
+            type: c[`${nameSpace}__resources_userCatelog_update`],
             payload: {userCatelog}
           });
+          return userCatelog;
         }
       );
   }
