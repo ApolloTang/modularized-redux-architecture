@@ -8,8 +8,6 @@ class Layout extends Component {
         super(props);
     }
     render() {
-
-      console.log('layout: ', this.props)
         return (
             <div className={`layout ${style['module-style']}`} >
               <div>{this.props.UserCatelog}</div>

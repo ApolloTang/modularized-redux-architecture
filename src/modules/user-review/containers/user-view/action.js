@@ -10,26 +10,24 @@ const userView = {
       dispatch({
         type: c[`${nameSpace}__userView_init`],
       });
-
       dispatch({
         type: c[`${nameSpace}__userView_fetch_begin`],
       });
       API.users.getOne(userId).then(
+      // API.users.getOne('432434234').then( //<--- for testing not found
         user=>{
           setTimeout( ()=>{
             dispatch({
               type: c[`${nameSpace}__userView_fetch_success`],
             });
           }, 2000)
-        },
-        err=>{
-          dispatch({
-            type: c[`${nameSpace}__userView_fetch_fail`],
-            error: err
-          });
-        },
-
-      );
+        }
+      ).catch((err)=>{
+        dispatch({
+          type: c[`${nameSpace}__userView_fetch_fail`],
+          error: err
+        });
+      });
     }
   },
 

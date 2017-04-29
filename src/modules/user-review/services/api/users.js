@@ -31,7 +31,6 @@ const users = {
           });
           return user;
         }
-        /* @TODO handle error */
       );
   },
   create() {
