@@ -44,4 +44,22 @@ const post = (url, payload, /* opts */ ) => {
   );
 };
 
-export default { get, post };
+const del = (url) => {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+
+  const init = {
+    method: 'DELETE',
+    headers: headers,
+    mode: 'cors',
+    cache: 'default',
+  };
+
+  const request = new Request(url, init);
+
+  return fetch(request).then(
+    response => response.json()
+  );
+};
+
+export default { get, post, del };

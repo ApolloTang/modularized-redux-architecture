@@ -10,6 +10,7 @@ class UserCatalog extends React.Component {
   constructor(props) {
     super(props);
     this.handle_getUser = this.handle_getUser.bind(this);
+    this.handle_deleteUser = this.handle_deleteUser.bind(this);
     this._cache = {};
   }
   componentDidMount() {
@@ -33,6 +34,12 @@ class UserCatalog extends React.Component {
       this._cache.userId = userId;
     }
   }
+  handle_deleteUser(userId) {
+    const isNew = /^new$/i.test(userId)
+    if (!isNew) {
+      this.props.dispatch_deleteUser(userId)
+    }
+  }
   render() {
     const name = _.get(this.props.users, `${this._cache.userId}.name`, void 0)
     return (this.props.isLoading) ? (
@@ -44,6 +51,7 @@ class UserCatalog extends React.Component {
       <div>
         <div>{`id: ${this._cache.userId}`}</div>
         <div>{`Name: ${name}`}</div>
+        <button onClick={()=>{ this.handle_deleteUser(this._cache.userId) }}>delete this user</button>
       </div>
     )
   }

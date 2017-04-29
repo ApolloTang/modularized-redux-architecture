@@ -14,6 +14,7 @@ import userView from '../containers/user-view/action-names';
 const resources = [
   'resources_userCatelog_update',
   'resources_users_update',
+  'resources_users_delete',
 ];
 
 const symbols = [

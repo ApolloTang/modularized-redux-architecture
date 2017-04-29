@@ -44,6 +44,19 @@ const users = {
           return newUser;
         }
       )
+  },
+  del(userId) {
+    return createHttp
+      .del(`${rootUrl}/users/${userId}`)
+      .then(
+        deletedUser => {
+          store.dispatch( {
+            type: c[`${nameSpace}__resources_users_delete`],
+            payload: {deletedUser}
+          });
+          return deletedUser;
+        }
+      )
   }
 
 }

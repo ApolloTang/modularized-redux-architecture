@@ -13,8 +13,10 @@ const mapStoreToProps = store=>{
 
 const mapDispatchToProps = dispatch => ({
   dispatch_init() { dispatch(Action.init() ) },
-  dispatch_fetchUser(userId) { dispatch(Action.fetchUser(userId) ) },
-  dispatch_someAction() { dispatch( Action_someAction() ); }
+  dispatch_fetchUser(userId) { dispatch( Action.fetchUser(userId) ) },
+  dispatch_deleteUser(userId) { dispatch( Action.deleteUser(userId) ) },
+
+  // dispatch_someAction() { dispatch( Action_someAction() ); }
 });
 
 
