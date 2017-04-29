@@ -49,9 +49,16 @@ const userView = {
             type: c[`${nameSpace}__userView_delete_success`],
             payload: {user}
           });
-          // now that user has been delete, we can no longer
-          // stay in this user page, so we have to navigate away
-          dispatch( push('/users'));
+
+          // List of task to clean up deleting:
+          //    1) remove resources.viewUser.userId
+          //        done in its reduce
+          //    2) remove resources.userCatelog.userId
+          //        done in its reduce
+          //    3) refeach userCatelog
+                    // Action_userCatelog.fetchUserCatelog();
+          //    4) navigate to /users
+                    // dispatch( push('/users'));
 
           return user;
         }

@@ -39,9 +39,14 @@ class UserCatalog extends React.Component {
   constructor(props) {
     super(props);
     this.handle_selectUser = this.handle_selectUser.bind(this);
+    this.handle_getUserCatelog = this.handle_getUserCatelog.bind(this);
   }
   componentDidMount() {
     this.props.dispatch_init();
+    this.handle_getUserCatelog();
+  }
+  handle_getUserCatelog() {
+    this.props.dispatch_fetchUserCatelog();
   }
   handle_selectUser(userId) {
     this.props.dispatch_selectUser(userId);

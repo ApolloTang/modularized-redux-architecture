@@ -50,9 +50,10 @@ const users = {
       .del(`${rootUrl}/users/${userId}`)
       .then(
         deletedUser => {
+          console.log('rrrr in service: deletedUser: ', deletedUser )
           store.dispatch( {
             type: c[`${nameSpace}__resources_users_delete`],
-            payload: {deletedUser}
+            payload: {deletedUser: deletedUser}
           });
           return deletedUser;
         }

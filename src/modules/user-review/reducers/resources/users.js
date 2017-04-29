@@ -13,30 +13,36 @@ const users = (state = {}, action) => {
       const payload = action.payload
       let usersFromPayload = [];
       if (payload.hasOwnProperty('user')) {
-        // payload receive a single user object
-        usersFromPayload.push(payload.user);
+        // payload receive a single user object, put it in an array
+        usersFromPayload = [payload.user];
       }
       if (payload.hasOwnProperty('users')) {
         // payload receive a collection of users object in array
         usersFromPayload=payload.users;
       }
 
-      console.log('state; ', state);
-      const users_prev = state.users;
-      const users_next = {
-        ...state.user_prev,
-        ...array_to_IndexirizedObj(usersFromPayload)
+      console.log('yyyyyyy usersFromPayload; ', usersFromPayload);
+      const state_prev = state;
+      console.log('yyyyyyy state; ', state);
+      const newUserObj = array_to_IndexirizedObj(usersFromPayload)
+      console.log('yyyyyyy newUserObj; ', newUserObj);
+      const state_next = {
+        ...state_prev,
+        ...newUserObj
       };
-      return users_next;
+      console.log('yyyyyyy state_next; ', state_next);
+      return state_next;
     }
     case c[`${nameSpace}__resources_users_delete`] : {
+      console.log('rrrr in reduce resources'  )
       const payload = action.payload
 
       let id_deletedUser;
+      console.log('rrrr in reduce resources users: payload: ', payload )
       if (payload.hasOwnProperty('deletedUser')) {
         // payload receive a single user object
         id_deletedUser = payload.deletedUser._id;
-        console.log('xxxx id_deletedUser: ', id_deletedUser)
+        console.log('rrrr id_deletedUser: ', id_deletedUser)
       }
       if (payload.hasOwnProperty('deletedUsers')) {
         // payload receive a collection of users object in array

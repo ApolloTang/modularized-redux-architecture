@@ -6,7 +6,7 @@ import { Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 import {mapStoreToProps, mapDispatchToProps} from './selector';
 
 
-class UserCatalog extends React.Component {
+class UserView extends React.Component {
   constructor(props) {
     super(props);
     this.handle_getUser = this.handle_getUser.bind(this);
@@ -14,7 +14,6 @@ class UserCatalog extends React.Component {
     this._cache = {};
   }
   componentDidMount() {
-    console.log('user view: ', this.props)
     this.props.dispatch_init();
     const userId = this._cache.userId = this.props.match.params.userId;
     this.handle_getUser(userId);
@@ -58,5 +57,5 @@ class UserCatalog extends React.Component {
 
 };
 
-export default connect(mapStoreToProps, mapDispatchToProps)(UserCatalog);
+export default connect(mapStoreToProps, mapDispatchToProps)(UserView);
 

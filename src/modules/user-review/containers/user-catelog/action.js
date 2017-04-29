@@ -10,6 +10,13 @@ const userCatelog = {
       dispatch({
         type: c[`${nameSpace}__userCatelog_fetch_begin`],
       });
+    };
+  },
+  fetchUserCatelog () {
+    return (dispatch, getState) => {
+      dispatch({
+        type: c[`${nameSpace}__userCatelog_fetch_begin`],
+      });
       API.userCatelog.getAll().then(
         userCatelog=>{
           setTimeout( ()=>{
