@@ -5,11 +5,15 @@ import API from '../../services/api';
 
 
 const userView = {
-  init(userId) {
+  init() {
     return (dispatch, getState) => {
       dispatch({
         type: c[`${nameSpace}__userView_init`],
       });
+    }
+  },
+  fetchUser(userId) {
+    return (dispatch, getState) => {
       dispatch({
         type: c[`${nameSpace}__userView_fetch_begin`],
       });
@@ -19,8 +23,9 @@ const userView = {
           setTimeout( ()=>{
             dispatch({
               type: c[`${nameSpace}__userView_fetch_success`],
+              payload: {user}
             });
-          }, 2000)
+          }, 2000);
         }
       ).catch((err)=>{
         dispatch({

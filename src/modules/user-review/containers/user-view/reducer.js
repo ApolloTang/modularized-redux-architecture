@@ -14,15 +14,15 @@ const userCatelog = (state = {...initialState}, action) => {
     case `@@router/LOCATION_CHANGE` : {
       return {...state}
     }
-    case c[`${nameSpace}__userCatelog_init`]: {
+    case c[`${nameSpace}__userView_init`]: {
       return { ...state, }
       }
-    case c[`${nameSpace}__userCatelog_fetch_begin`]: {
+    case c[`${nameSpace}__userView_fetch_begin`]: {
       const state_prev = {...state};
       const state_next = {...state};
       return state_next;
     }
-    case c[`${nameSpace}__userCatelog_fetch_success`]: {
+    case c[`${nameSpace}__userView_fetch_success`]: {
       const state_prev = {...state};
       const state_next = {
         ...state,
@@ -30,22 +30,13 @@ const userCatelog = (state = {...initialState}, action) => {
       };
       return state_next;
     }
-    case c[`${nameSpace}__userCatelog_fetch_fail`] : {
+    case c[`${nameSpace}__userView_fetch_fail`] : {
       const payload = action.payload;
       const state_prev = {...state};
       const state_next = {
         ...state,
         isLoading: false,
         httpError: payload.error
-      };
-      return state_next;
-    }
-    case c[`${nameSpace}__userCatelog_selectUser`] : {
-      const payload = action.payload;
-      const state_prev = {...state};
-      const state_next = {
-        ...state,
-        id_selectedUser: payload.userId
       };
       return state_next;
     }
