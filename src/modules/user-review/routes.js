@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
 import UserView from './containers/user-view';
+import UserEditCreate from './containers/user-edit-create';
 
 
 const GiveReview = (props)=>{
@@ -32,7 +33,9 @@ const viewReview = (props)=>{
 const routes = (
   <Switch>
     <Route exact path="/users" component={()=>(<div>users</div>)} />
-    <Route exact path="/users/:userId" component={(props)=><UserView {...props}/>} />
+    <Route exact path="/users/new"            component={(props)=><UserEditCreate {...props}/>} />
+    <Route exact path="/users/:userId/edit"   component={(props)=><UserEditCreate {...props}/>} />
+    <Route exact path="/users/:userId"        component={(props)=><UserView {...props}/>} />
     <Route exact path="/users/:userId/view-review/:targetId" component={viewReview} />
     <Route exact path="/users/:userId/view-review/" component={viewReview} />
     <Route exact path="/users/:userId/give-review/:targetId" component={GiveReview} />
