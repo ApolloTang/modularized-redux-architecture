@@ -17,7 +17,6 @@ const users = {
           });
           return users;
         }
-        /* @TODO handle error */
       );
   },
   getOne(userId) {
@@ -44,7 +43,6 @@ const users = {
           });
           return newUser;
         }
-        /* @TODO handle error */
       )
   }
 

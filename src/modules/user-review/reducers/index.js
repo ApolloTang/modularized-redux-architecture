@@ -5,9 +5,11 @@ import c from '../common/actions-names';
 import {nameSpace} from '../config';
 
 import userCatelog from '../containers/user-catelog/reducer';
+import userView from '../containers/user-view/reducer';
 
 const session = combineReducers( {
-  userCatelog
+  userCatelog,
+  userView
 });
 
 import resources from './resources';

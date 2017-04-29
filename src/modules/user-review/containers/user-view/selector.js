@@ -4,7 +4,7 @@ import {nameSpace} from '../../config';
 
 const mapStoreToProps = store=>{
   const users = _.get(store, `modules.${nameSpace}.resources.users`, null);
-  const isLoading = _.get(store, `modules.${nameSpace}.session.users.isLoading`, true);
+  const isLoading = _.get(store, `modules.${nameSpace}.session.userView.isLoading`, true);
   return {
     users,
     isLoading

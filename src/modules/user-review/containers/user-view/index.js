@@ -35,8 +35,8 @@ class UserCatalog extends React.Component {
   }
   render() {
     const name = _.get(this.props.users, `${this._cache.userId}.name`, void 0)
-    // return (this.props.isLoading) ? (
-    return (false) ? (
+    return (this.props.isLoading) ? (
+    // return (false) ? (
       <div>
         <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
       </div>

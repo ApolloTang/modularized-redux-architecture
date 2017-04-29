@@ -25,7 +25,7 @@ const userView = {
               type: c[`${nameSpace}__userView_fetch_success`],
               payload: {user}
             });
-          }, 2000);
+          }, 1000);
         }
       ).catch((err)=>{
         dispatch({
