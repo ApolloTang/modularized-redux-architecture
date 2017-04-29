@@ -13,13 +13,12 @@ const userCatelog = {
       API.userCatelog.getAll().then(
         userCatelog=>{
           setTimeout( ()=>{
+            const ids_userCatelog = userCatelog.map( user=>user._id);
             dispatch({
               type: c[`${nameSpace}__userCatelog_fetch_success`],
-              payload: {
-                ids_userCatelog: userCatelog.map( user=>user._id)
-              }
+              payload: { ids_userCatelog }
             });
-          }, 2000)
+          }, 1000)
         },
         err=>{
           dispatch({

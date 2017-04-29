@@ -4,7 +4,7 @@ import {nameSpace} from '../../config';
 import {combineReducers} from 'redux';
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   httpError: null
 }
 
@@ -18,7 +18,10 @@ const userCatelog = (state = {...initialState}, action) => {
       }
     case c[`${nameSpace}__userView_fetch_begin`]: {
       const state_prev = {...state};
-      const state_next = {...state};
+      const state_next = {
+        ...state,
+        isLoading: true
+      };
       return state_next;
     }
     case c[`${nameSpace}__userView_fetch_success`]: {

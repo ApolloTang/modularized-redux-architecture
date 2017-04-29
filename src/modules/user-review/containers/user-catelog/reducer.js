@@ -7,7 +7,7 @@ const initialState = {
   isLoading: true,
   id_selectedUser: null,
   httpError: null,
-  userCatelog: []
+  ids_userCatelog: []
 }
 
 const userCatelog = (state = {...initialState}, action) => {
