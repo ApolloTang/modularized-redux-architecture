@@ -18,7 +18,7 @@ const userCatelog = (state = {}, action) => {
       }
       return userCat_next;
     }
-    case c[`${nameSpace}__resources_user_delete`] : {
+    case c[`${nameSpace}__resources_userCatelog_delete`] : {
       const payload = action.payload
 
       let id_deletedUser;

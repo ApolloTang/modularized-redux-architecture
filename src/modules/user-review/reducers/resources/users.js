@@ -43,7 +43,7 @@ const users = (state = {}, action) => {
 
       const state_prev = state;
       const users_next = _.cloneDeep(state);
-      delete users_next[id_deletedUser]
+      delete users_next[id_deletedUser];
       return users_next;
     }
     default: {

@@ -53,9 +53,9 @@ const userView = {
 
           // List of task to clean up deleting:
           //    1) remove resources.viewUser.userId
-          //        done in its reduce
+          //        done in its reduce  <---  @TODO not yet impliment
           //    2) remove resources.userCatelog.userId
-          //        done in its reduce
+          //        done in its reduce  <---  @TODO not yet impliment
           //    3) refeach userCatelog
                     dispatch(Action_userCatelog.fetchUserCatelog() )
           //    4) navigate to /users

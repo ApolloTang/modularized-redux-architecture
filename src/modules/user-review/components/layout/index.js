@@ -10,10 +10,10 @@ class Layout extends Component {
     render() {
         return (
             <div className={`layout ${style['module-style']}`} >
-              <div>{this.props.UserCatelog}</div>
-              <div>
-                <div>{this.props.FunctionNavigation}</div>
-                <div>{this.props.routes}</div>
+              <div className="leftPannel">{this.props.UserCatelog}</div>
+              <div className="rightPannel">
+                <div className="head">{this.props.FunctionNavigation}</div>
+                <div className="body">{this.props.routes}</div>
               </div>
             </div>
         );
