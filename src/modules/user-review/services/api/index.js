@@ -1,5 +1,5 @@
 
-import userCatelog from './userCatelog';
+import userCatelog from './user-catelog';
 import users from './users';
 
 const API = {
