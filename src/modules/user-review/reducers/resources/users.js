@@ -21,11 +21,31 @@ const users = (state = {}, action) => {
         usersFromPayload=payload.users;
       }
 
-      const users_prev = state.users_prev;
+      console.log('state; ', state);
+      const users_prev = state.users;
       const users_next = {
         ...state.user_prev,
         ...array_to_IndexirizedObj(usersFromPayload)
       };
+      return users_next;
+    }
+    case c[`${nameSpace}__resources_users_delete`] : {
+      const payload = action.payload
+
+      let id_deletedUser;
+      if (payload.hasOwnProperty('deletedUser')) {
+        // payload receive a single user object
+        id_deletedUser = payload.deletedUser._id;
+        console.log('xxxx id_deletedUser: ', id_deletedUser)
+      }
+      if (payload.hasOwnProperty('deletedUsers')) {
+        // payload receive a collection of users object in array
+        // ... not implimented
+      }
+
+      console.log('state; ', state);
+      const users_next = _.cloneDeep(state.users);
+      delete users_next[id_deletedUser]
       return users_next;
     }
     default: {

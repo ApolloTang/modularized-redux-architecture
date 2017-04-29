@@ -18,6 +18,25 @@ const userCatelog = (state = {}, action) => {
       }
       return userCat_next;
     }
+    case c[`${nameSpace}__resources_user_delete`] : {
+      const payload = action.payload
+
+      let id_deletedUser;
+      if (payload.hasOwnProperty('deletedUser')) {
+        // payload receive a single user object
+        id_deletedUser = payload.deletedUser._id;
+        console.log('xxxx id_deletedUser: ', id_deletedUser)
+      }
+      if (payload.hasOwnProperty('deletedUsers')) {
+        // payload receive a collection of users object in array
+        // ... not implimented
+      }
+
+      console.log('state; ', state);
+      const users_next = _.cloneDeep(state.users);
+      delete users_next[id_deletedUser]
+      return users_next;
+    }
     default: {
       return state;
     }
