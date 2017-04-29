@@ -4,6 +4,7 @@ import {nameSpace} from '../../config';
 import API from '../../services/api';
 
 import { push } from 'connected-react-router'
+import Action_userCatelog from  '../user-catelog/action'
 
 const userView = {
   init() {
@@ -56,9 +57,9 @@ const userView = {
           //    2) remove resources.userCatelog.userId
           //        done in its reduce
           //    3) refeach userCatelog
-                    // Action_userCatelog.fetchUserCatelog();
+                    dispatch(Action_userCatelog.fetchUserCatelog() )
           //    4) navigate to /users
-                    // dispatch( push('/users'));
+                    dispatch( push('/users'));
 
           return user;
         }
