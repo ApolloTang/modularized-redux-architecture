@@ -15,6 +15,9 @@ const userCatelog = {
           setTimeout( ()=>{
             dispatch({
               type: c[`${nameSpace}__userCatelog_fetch_success`],
+              payload: {
+                ids_userCatelog: userCatelog.map( user=>user._id)
+              }
             });
           }, 2000)
         },

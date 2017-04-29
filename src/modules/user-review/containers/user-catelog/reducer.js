@@ -6,7 +6,8 @@ import {combineReducers} from 'redux';
 const initialState = {
   isLoading: true,
   id_selectedUser: null,
-  httpError: null
+  httpError: null,
+  userCatelog: []
 }
 
 const userCatelog = (state = {...initialState}, action) => {
@@ -16,17 +17,24 @@ const userCatelog = (state = {...initialState}, action) => {
     }
     case c[`${nameSpace}__userCatelog_init`]: {
       return { ...state, }
-      }
+    }
     case c[`${nameSpace}__userCatelog_fetch_begin`]: {
-      const state_prev = {...state};
-      const state_next = {...state};
+      const state_prev = state;
+      const state_next = {
+        ...state_prev,
+        isLoading:true
+      };
       return state_next;
     }
     case c[`${nameSpace}__userCatelog_fetch_success`]: {
-      const state_prev = {...state};
+      const payload = action.payload;
+      const ids_userCatelog = payload.ids_userCatelog;
+
+      const state_prev = state;
       const state_next = {
         ...state,
-        isLoading: false
+        ids_userCatelog,
+        isLoading: false,
       };
       return state_next;
     }
