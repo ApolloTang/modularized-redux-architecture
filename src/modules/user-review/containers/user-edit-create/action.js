@@ -2,7 +2,9 @@ import c from '../../common/actions-names';
 import {nameSpace} from '../../config';
 
 import API from '../../services/api';
+
 import { push } from 'connected-react-router'
+import Action_userCatelog from  '../user-catelog/action'
 
 function isValid_userId(userId) {
   return (userId.match(/^[0-9a-fA-F]{24}$/) || userId.match(/^new$/i));
@@ -136,9 +138,15 @@ const user_EditOrCreate = {
               payload: { userId, user:newUser }
             });
 
-            // 1) Update store
+            const newId = newUser._id;
+
+            // 1) add this user to resource/user
+               // @TODO
+            // 2) update user catelog so it has this user
+              dispatch(Action_userCatelog.fetchUserCatelog() )
             // 2) Navigate to view new user
-            // 3) Close Draft
+              dispatch( push(`/users/${newId}`));
+            // 4) Close Draft
               dispatch({
                   type: c[`${nameSpace}__user_editOrCreate_draft_close`],
                   payload: {}
