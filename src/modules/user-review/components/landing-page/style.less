@@ -1,0 +1,31 @@
+/* +++++++++++++++++++++++++++++++++ style-file[start] modules/module-a/style.less */
+
+@import "~common/styles-init/index";
+
+:local(.module-style) {
+    height: 100%;
+    .mixin-module-style(#eee);
+    .leftPannel {
+      .oban-clearfix();
+      float: left;
+      width: 100px;
+
+    }
+    .rightPannel {
+      .oban-clearfix();
+      height: 100%;
+      float: left;
+      width: calc( ~"100% - 100px" );
+        .head {
+          .oban-clearfix();
+          height: 50px;
+          width: 100%;
+        }
+        .body {
+          .oban-clearfix();
+          height: calc( ~"100% - 50px")
+        }
+    }
+}
+
+/* +++++++++++++++++++++++++++++++++ style-file[end]   modules/module-a/style.less */

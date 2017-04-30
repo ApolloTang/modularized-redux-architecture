@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch, Link, Redirect } from 'react-router-dom';
 
+import NotFound from 'components/not-found';
+
 import FontTest from 'modules/font-test';
 import LazyLoad from 'modules/lazy-load';
 import Todos from 'modules/todos';
@@ -33,6 +35,7 @@ const routes = (
     <Route path="/lazy-load" component={LazyLoad} />
     <Route path="/todos/:filterType" component={Todos} />
     <Route path="/rest" component={Rest} />
+    <Route component={NotFound}/>
   </Switch>
 );
 

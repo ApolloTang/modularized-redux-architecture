@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+import LandingPage from './components/landing-page';
+import NotFound from 'components/not-found';
 import UserView from './containers/user-view';
 import UserEditCreate from './containers/user-edit-create';
 
@@ -32,7 +34,7 @@ const viewReview = (props)=>{
 
 const routes = (
   <Switch>
-    <Route exact path="/users" component={()=>(<div>users</div>)} />
+    <Route exact path="/users"                component={(props)=><LandingPage    {...props}/>} />
     <Route exact path="/users/new"            component={(props)=><UserEditCreate {...props}/>} />
     <Route exact path="/users/:userId/edit"   component={(props)=><UserEditCreate {...props}/>} />
     <Route exact path="/users/:userId"        component={(props)=><UserView {...props}/>} />
@@ -40,6 +42,7 @@ const routes = (
     <Route exact path="/users/:userId/view-review/" component={viewReview} />
     <Route exact path="/users/:userId/give-review/:targetId" component={GiveReview} />
     <Route exact path="/users/:userId/give-review/" component={GiveReview} />
+    <Route component={NotFound}/>
   </Switch>
 );
 
