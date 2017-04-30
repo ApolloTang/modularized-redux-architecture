@@ -22,18 +22,25 @@ class UserView extends React.Component {
 
     this.onFieldChange = this.onFieldChange.bind(this);
 
-    this._cache = {};
+    this.state = { };
+
+    this._cache = {
+      isValid_userId: true
+    };
   }
-  componentDidMount() {
+  componentWillMount() {
     const isNew = (this.props.match.path === '/users/new');
-    if ( _userId && !isValid_userId(_userId)) {
-      console.log('[Error] userId is invalid'); // eslint-disable-line no-console
-      return;
-    }
+
     const _userId = this._cache.userId = this.props.match.params.userId;
     const userId = isNew ? void 0 : _userId;
 
-    this.props.dispatch_draftInit(userId);
+    if ( _userId && !isValid_userId(_userId)) {
+      console.error(`[Error] userId ${userId} is invalid`); // eslint-disable-line no-console
+      this._cache.isValid_userId = false;
+    }
+  }
+  componentDidMount() {
+    this.props.dispatch_draftInit(this._cache.userId);
   }
   handle_draftChanged(data) {
     this.props.dispatch_draftChanged(data);
@@ -62,15 +69,28 @@ class UserView extends React.Component {
     };
   }
   render() {
+    const httpError  = _.get(this.props, `httpError`, void 0);
+
+    if (this.props.isLoading) {
+      return(
+        <div>
+          <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+        </div>
+      )
+    }
+
+    if (!this._cache.isValid_userId || (httpError && !httpError.ok )) {
+      return(
+        <div>
+          This user does not exist
+        </div>
+      )
+    }
+
     const _name = _.get(this.props.users, `${this._cache.userId}.name`, void 0)
     const name = _name ? _name : '';
 
-    return (this.props.isLoading) ? (
-    // return (false) ? (
-      <div>
-        <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-      </div>
-    ):(
+    return (
       <div>
         <div>Edit/Create User</div>
         <div>{`id: ${this._cache.userId}`}</div>

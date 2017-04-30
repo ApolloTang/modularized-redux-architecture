@@ -18,10 +18,12 @@ const user_EditOrCreate = {
         payload: { userId: _userId }
       });
 
-      if (_userId && !isValid_userId(_userId)) {
-        console.log('[Error] userId is invalid'); // eslint-disable-line no-console
-        return;
-      }
+      ///// decide to let server handle this
+      //
+      // if (_userId && !isValid_userId(_userId)) {
+      //   console.log('[Error] userId is invalid'); // eslint-disable-line no-console
+      //   return;
+      // }
 
       // const isNew = /^new$/i.test(_userId);
       // const userId = isNew ? void 0 : _userId;
@@ -37,6 +39,15 @@ const user_EditOrCreate = {
       if (userId) {
         API.users.getOne(userId).then(
           user => {
+            if ( user.hasOwnProperty('httpError')) {
+              const httpError = user.httpError;
+              dispatch({
+                type: c[`${nameSpace}__user_editOrCreate_draft_initDefault_fail`],
+                payload: {httpError}
+              });
+              return {httpError};
+            }
+
             // -- prepare initial draft for edit -- //
             const user_picked = _.pick(user, Object.keys(draft_default)); // only pick the field that required
 

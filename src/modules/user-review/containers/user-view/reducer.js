@@ -8,7 +8,7 @@ const initialState = {
   httpError: null
 }
 
-const userCatelog = (state = {...initialState}, action) => {
+const userView = (state = {...initialState}, action) => {
   switch (action.type) {
     case `@@router/LOCATION_CHANGE` : {
       return {...state}
@@ -38,7 +38,7 @@ const userCatelog = (state = {...initialState}, action) => {
       const state_next = {
         ...state,
         isLoading: false,
-        httpError: payload.error
+        httpError: payload.httpError
       };
       return state_next;
     }
@@ -48,4 +48,4 @@ const userCatelog = (state = {...initialState}, action) => {
   }
 }
 
-export default userCatelog;
+export default userView;

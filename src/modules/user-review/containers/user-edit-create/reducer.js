@@ -10,7 +10,8 @@ const initialState = {
     isOpen: false,
     isDirty: false,
     showErrors : false,
-    draftErrors : []
+    draftErrors : [],
+    httpError: null
 }
 
 const user_EditOrCreate = (state = {...initialState}, action) => {
@@ -20,7 +21,7 @@ const user_EditOrCreate = (state = {...initialState}, action) => {
     }
     case c[`${nameSpace}__user_editOrCreate_draft_open`]: {
       return {
-        ...state,
+        ...initialState,
         isOpen: true,
         isLoading: true
       };
@@ -46,12 +47,14 @@ const user_EditOrCreate = (state = {...initialState}, action) => {
       };
     }
     case c[`${nameSpace}__user_editOrCreate_draft_initDefault_fail`]: {
-      const error = _.get(action, 'payload.error', {});
-      return {
+      const payload = action.payload;
+      const state_prev = {...state};
+      const state_next = {
         ...state,
-        error,
         isLoading: false,
+        httpError: payload.httpError
       };
+      return state_next;
     }
     case c[`${nameSpace}__user_editOrCreate_draft_changed`]: {
       const data = _.get(action, `payload.data`);

@@ -40,19 +40,33 @@ class UserView extends React.Component {
     }
   }
   render() {
-    const name = _.get(this.props.users, `${this._cache.userId}.name`, void 0)
-    return (this.props.isLoading) ? (
-    // return (false) ? (
-      <div>
-        <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-      </div>
-    ):(
-      <div>
-        <div>{`id: ${this._cache.userId}`}</div>
-        <div>{`Name: ${name}`}</div>
-        <button onClick={()=>{ this.handle_deleteUser(this._cache.userId) }}>delete this user</button>
-      </div>
-    )
+    const httpError  = _.get(this.props, `httpError`, void 0);
+
+    if (this.props.isLoading) {
+      return(
+        <div>
+          <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+        </div>
+      )
+    }
+
+    const name = _.get(this.props.users, `${this._cache.userId}.name`, void 0);
+    if (httpError && !httpError.ok ) {
+      return(
+        <div>
+          This user does not exist, please select another user.
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <div>{`id: ${this._cache.userId}`}</div>
+          <div>{`Name: ${name}`}</div>
+          <button onClick={()=>{ this.handle_deleteUser(this._cache.userId) }}>delete this user</button>
+        </div>
+      )
+    }
+
   }
 
 };

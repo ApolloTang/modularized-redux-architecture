@@ -23,19 +23,29 @@ const userView = {
       // API.users.getOne('432434234').then( //<--- for testing not found
         user=>{
           setTimeout( ()=>{
-            dispatch({
-              type: c[`${nameSpace}__userView_fetch_success`],
-              payload: {user}
-            });
-            return user;
+            if ( user.hasOwnProperty('httpError')) {
+              const httpError = user.httpError;
+              dispatch({
+                type: c[`${nameSpace}__userView_fetch_fail`],
+                payload: {httpError}
+              });
+              return {httpError};
+            } else {
+              dispatch({
+                type: c[`${nameSpace}__userView_fetch_success`],
+                payload: {user}
+              });
+              return user;
+            }
           }, 1000);
+        },
+        (err)=>{
+          dispatch({
+            type: c[`${nameSpace}__userView_fetch_fail`],
+            error: err
+          });
         }
-      ).catch((err)=>{
-        dispatch({
-          type: c[`${nameSpace}__userView_fetch_fail`],
-          error: err
-        });
-      });
+      )
     }
   },
   deleteUser(userId) {
