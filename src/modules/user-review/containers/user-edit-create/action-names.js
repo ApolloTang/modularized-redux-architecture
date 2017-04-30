@@ -5,7 +5,7 @@ const userEditOrCreated = [
   'user_editOrCreate_draft_initDefault',
   'user_editOrCreate_draft_initDefault_fail',
 
-  'user_editOrCreate_draft_fieldChanged',
+  'user_editOrCreate_draft_changed',
   'user_editOrCreate_draft_saveInitiated',
 
   'user_editOrCreate_draft_submit_start',

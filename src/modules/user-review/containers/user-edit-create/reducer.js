@@ -55,12 +55,13 @@ const user_EditOrCreate = (state = {...initialState}, action) => {
     }
     case c[`${nameSpace}__user_editOrCreate_draft_changed`]: {
       const data = _.get(action, `payload.data`);
-
+      let draft_prev;
+      let draft_next;
       if (Object.prototype.toString.call(data) === '[object Array]') {
         // multi fields @TODO multi field update action not implimented
       } else {
-        const draft_prev =  _.cloneDeep(state.draft);
-        const draft_next =  {
+        draft_prev =  _.cloneDeep(state.draft);
+        draft_next =  {
           ...draft_prev,
           ...data
         };
