@@ -116,9 +116,13 @@ const user_EditOrCreate = {
               payload: { userId, user:userEdited }
             });
 
-            // 1) Update store
-            // 2) Navigate to view edited user
-            // 3) Close Draft
+            // 1) add this user to resource/user
+               // @TODO
+            // 2) update user catelog so it has this user
+              dispatch(Action_userCatelog.fetchUserCatelog() )
+            // 2) Navigate to view new user
+              dispatch( push(`/users/${userId}`));
+            // 4) Close Draft
               dispatch({
                   type: c[`${nameSpace}__user_editOrCreate_draft_close`],
                   payload: {}
