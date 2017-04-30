@@ -32,9 +32,9 @@ const users = {
         }
       );
   },
-  create() {
+  create(payload) {
     return createHttp
-      .post(`${rootUrl}/users`)
+      .post(`${rootUrl}/users`, payload)
       .then(
         newUser => {
           store.dispatch( {
@@ -45,12 +45,24 @@ const users = {
         }
       )
   },
+  update(userId, payload) {
+    return createHttp
+      .put(`${rootUrl}/users/${userId}`, payload)
+      .then(
+        userEdited => {
+          store.dispatch( {
+            type: c[`${nameSpace}__resources_users_update`],
+            payload: {userEdited}
+          });
+          return userEdited;
+        }
+      )
+  },
   del(userId) {
     return createHttp
       .del(`${rootUrl}/users/${userId}`)
       .then(
         deletedUser => {
-          console.log('rrrr in service: deletedUser: ', deletedUser )
           store.dispatch( {
             type: c[`${nameSpace}__resources_users_delete`],
             payload: {deletedUser: deletedUser}

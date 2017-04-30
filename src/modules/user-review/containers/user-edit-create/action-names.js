@@ -1,14 +1,16 @@
-const userView = [
-  'userView_init',
+const userEditOrCreated = [
+  'user_editOrCreate_draft_open',
+  'user_editOrCreate_draft_close',
 
-  `userView_fetch_begin`,
-  'userView_fetch_success',
-  'userView_fetch_fail',
+  'user_editOrCreate_draft_initDefault',
+  'user_editOrCreate_draft_initDefault_fail',
 
-  `userView_delete_begin`,
-  'userView_delete_success',
-  'userView_delete_fail',
+  'user_editOrCreate_draft_fieldChanged',
+  'user_editOrCreate_draft_saveInitiated',
+
+  'user_editOrCreate_draft_submit_start',
+  'user_editOrCreate_draft_submit_success',
+  'user_editOrCreate_draft_submit_fail'
 ];
 
-
-export default userView;
+export default userEditOrCreated;

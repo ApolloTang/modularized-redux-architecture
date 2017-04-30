@@ -6,10 +6,12 @@ import {nameSpace} from '../config';
 
 import userCatelog from '../containers/user-catelog/reducer';
 import userView from '../containers/user-view/reducer';
+import userEditOrCreate from '../containers/user-edit-create/reducer';
 
 const session = combineReducers( {
   userCatelog,
-  userView
+  userView,
+  userEditOrCreate
 });
 
 import resources from './resources';

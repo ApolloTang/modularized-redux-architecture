@@ -12,8 +12,10 @@ const mapStoreToProps = store=>{
 };
 
 const mapDispatchToProps = dispatch => ({
-  dispatch_init() { dispatch(Action.init() ) },
-  dispatch_fetchUser(userId) { dispatch( Action.fetchUser(userId) ) },
+  dispatch_draftInit(userId) { dispatch(Action.draftInit(userId) ) },
+  dispatch_draftChanged(data) { dispatch(Action.draftChanged(data) ) },
+  dispatch_draftSubmit(userId) { dispatch(Action.darftSubmit(userId) ) },
+  dispatch_draftCancel() { dispatch(Action.draftTearDown() ) }
 });
 
 

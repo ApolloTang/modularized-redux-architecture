@@ -44,6 +44,27 @@ const post = (url, payload, /* opts */ ) => {
   );
 };
 
+const put = (url, payload, /* opts */ ) => {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+
+  const requestBody = JSON.stringify(payload);
+
+  const init = {
+    method: 'PUT',
+    headers: headers,
+    mode: 'cors',
+    cache: 'default',
+    body: requestBody
+  };
+
+  const request = new Request(url, init);
+
+  return fetch(request).then(
+    response => response.json()
+  );
+};
+
 const del = (url) => {
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
@@ -62,4 +83,4 @@ const del = (url) => {
   );
 };
 
-export default { get, post, del };
+export default { get, post, put, del };

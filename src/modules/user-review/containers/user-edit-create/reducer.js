@@ -4,48 +4,113 @@ import {nameSpace} from '../../config';
 import {combineReducers} from 'redux';
 
 const initialState = {
-  isLoading: false,
-  httpError: null
+    draft: null,
+    isLoading: false,
+    error: void 0,
+    isOpen: false,
+    isDirty: false,
+    showErrors : false,
+    draftErrors : []
 }
 
-const userCatelog = (state = {...initialState}, action) => {
+const user_EditOrCreate = (state = {...initialState}, action) => {
   switch (action.type) {
     case `@@router/LOCATION_CHANGE` : {
       return {...state}
     }
-    case c[`${nameSpace}__userView_init`]: {
-      return { ...state, }
+    case c[`${nameSpace}__user_editOrCreate_draft_open`]: {
+      return {
+        ...state,
+        isOpen: true,
+        isLoading: true
+      };
+    }
+    case c[`${nameSpace}__user_editOrCreate_draft_initDefault`]: {
+      const draft_prev = _.get(state, `draft`, null);
+      let draft_next = _.cloneDeep(draft_prev);
+      if ( draft_prev === null ) {
+          // Only inititialize draft with default values if there isn't already one.
+          // This is to prevent router reruning trigger initialization of form.
+          draft_next = _.get(action, 'payload.draft', {});
       }
-    case c[`${nameSpace}__userView_fetch_begin`]: {
-      const state_prev = {...state};
-      const state_next = {
+
+      // const meta={}; // <-- addition info for validation
+      // const draftErrors = validateDraft(draft_next, meta); // @TODO validation not impliment
+      const draftErrors = [];
+
+      return {
+        ...state,
+        draft: draft_next,
+        isLoading: false,
+        draftErrors,
+      };
+    }
+    case c[`${nameSpace}__user_editOrCreate_draft_initDefault_fail`]: {
+      const error = _.get(action, 'payload.error', {});
+      return {
+        ...state,
+        error,
+        isLoading: false,
+      };
+    }
+    case c[`${nameSpace}__user_editOrCreate_draft_changed`]: {
+      const data = _.get(action, `payload.data`);
+
+      if (Object.prototype.toString.call(data) === '[object Array]') {
+        // multi fields @TODO multi field update action not implimented
+      } else {
+        const draft_prev =  _.cloneDeep(state.draft);
+        const draft_next =  {
+          ...draft_prev,
+          ...data
+        };
+      }
+
+      // const meta={}; // <-- addition info for validation
+      // const draftErrors = validateDraft(draft_next, meta); // @TODO validation not impliment
+      const draftErrors = [];
+
+      return {
+        ...state,
+        draft: draft_next,
+        isDirty: true,
+        draftErrors,
+      };
+    }
+    case c[`${nameSpace}__user_editOrCreate_draft_saveInitiated`]: {
+      return {
+        ...state,
+        showErrors: true
+      };
+    }
+    case c[`${nameSpace}__user_editOrCreate_draft_submit_start`]: {
+      return {
         ...state,
         isLoading: true
       };
-      return state_next;
     }
-    case c[`${nameSpace}__userView_fetch_success`]: {
-      const state_prev = {...state};
-      const state_next = {
+    case c[`${nameSpace}__user_editOrCreate_draft_submit_success`]: {
+      return {
         ...state,
         isLoading: false
       };
-      return state_next;
     }
-    case c[`${nameSpace}__userView_fetch_fail`] : {
-      const payload = action.payload;
-      const state_prev = {...state};
-      const state_next = {
+    case c[`${nameSpace}__user_editOrCreate_draft_submit_fail`]: {
+      const error = _.get(action, 'payload.error', void 0);
+      return {
         ...state,
         isLoading: false,
-        httpError: payload.error
+        error
       };
-      return state_next;
     }
-    default: {
-      return state
+    case c[`${nameSpace}__user_editOrCreate_draft_close`]: {
+      return {
+        ...initialState,
+      };
     }
+    default:
+      return {...state};
   }
-}
+};
 
-export default userCatelog;
+export default user_EditOrCreate;

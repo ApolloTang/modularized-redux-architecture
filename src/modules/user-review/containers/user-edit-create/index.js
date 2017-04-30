@@ -5,33 +5,40 @@ import { Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 
 import {mapStoreToProps, mapDispatchToProps} from './selector';
 
+function isValid_userId(userId) {
+  return (userId.match(/^[0-9a-fA-F]{24}$/) || userId.match(/^new$/i));
+};
 
 class UserView extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handle_getUser = this.handle_getUser.bind(this);
+    this.handle_draftChanged = this.handle_draftChanged.bind(this);
     this.handle_save = this.handle_save.bind(this);
     this.handle_cancel = this.handle_cancel.bind(this);
 
     this._cache = {};
   }
   componentDidMount() {
-    this.props.dispatch_init();
-    const userId = this._cache.userId = this.props.match.params.userId;
-    this.handle_getUser(userId);
-    // init draft here
-  }
-  handle_getUser(userId) {
-    const isNew = /^new$/i.test(userId)
-    if (!isNew) {
-      this.props.dispatch_fetchUser(userId);
-      this._cache.userId = userId;
+    const isNew = (this.props.match.path === '/users/new');
+    if ( _userId && !isValid_userId(_userId)) {
+      console.log('[Error] userId is invalid'); // eslint-disable-line no-console
+      return;
     }
+    const _userId = this._cache.userId = this.props.match.params.userId;
+    const userId = isNew ? void 0 : _userId;
+
+    this.props.dispatch_draftInit(userId);
   }
-  handle_save(userId) {
+  handle_draftChanged(data) {
+    this.props.dispatch_draftInit(data);
   }
-  handle_cancel(userId) {
+  handle_save() {
+    const userId = this._cache.userId;
+    this.props.dispatch_draftSubmit(userId);
+  }
+  handle_cancel() {
+    this.props.dispatch_draftCancel();
   }
   render() {
     const name = _.get(this.props.users, `${this._cache.userId}.name`, void 0)
@@ -44,7 +51,7 @@ class UserView extends React.Component {
       <div>
         <div>Edit/Create User</div>
         <div>{`id: ${this._cache.userId}`}</div>
-        <div> <input type="text" value={name}/>{}</div>
+        <div> <input type="text" value={name} />{}</div>
 
         <button onClick={this.handle_save}>Save</button>
         <button onClick={this.handle_cancel}>cancel</button>

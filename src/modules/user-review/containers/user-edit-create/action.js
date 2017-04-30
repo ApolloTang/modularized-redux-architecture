@@ -2,47 +2,167 @@ import c from '../../common/actions-names';
 import {nameSpace} from '../../config';
 
 import API from '../../services/api';
-
 import { push } from 'connected-react-router'
-import Action_userCatelog from  '../user-catelog/action'
 
-const userEditCreate = {
-  init() {
+function isValid_userId(userId) {
+  return (userId.match(/^[0-9a-fA-F]{24}$/) || userId.match(/^new$/i));
+};
+
+const user_EditOrCreate = {
+  draftInit (_userId) {
     return (dispatch, getState) => {
       dispatch({
-        type: c[`${nameSpace}__userEdit_init`],
+        type: c[`${nameSpace}__user_editOrCreate_draft_open`],
+        payload: { userId: _userId }
       });
+
+      if (_userId && !isValid_userId(_userId)) {
+        console.log('[Error] userId is invalid'); // eslint-disable-line no-console
+        return;
+      }
+
+      // const isNew = /^new$/i.test(_userId);
+      // const userId = isNew ? void 0 : _userId;
+      const userId = _userId;
+
+      // const draft_default = {...(_.cloneDeep(services.draftDefaultValues)) }; // @TODO
+      const draft_default = {
+        ...( _.cloneDeep({
+          name: ''
+        }))
+      };
+
+      if (userId) {
+        API.users.getOne(userId).then(
+          user => {
+            // -- prepare initial draft for edit -- //
+            const user_picked = _.pick(user, Object.keys(draft_default)); // only pick the field that required
+
+            const draft = {
+              ...draft_default,  // <-- merge with the initial value in case there are field missing from API
+              ...user_picked
+            };
+            dispatch({
+              type: c[`${nameSpace}__user_editOrCreate_draft_initDefault`],
+              payload: { draft }
+            });
+          },
+          err => {
+            dispatch({
+              type: c[`${nameSpace}__user_editOrCreate_draft_initDefault_fail`],
+              error: err
+            });
+          }
+        )
+      } else if (!userId) {
+        // -- prepare initial draft for create -- //
+        const draft = { ...draft_default };
+
+        dispatch({
+          type: c[`${nameSpace}__user_editOrCreate_draft_initDefault`],
+          payload: { userId, draft }
+        });
+      }
     }
   },
-  initDraft(userId) {
-    if (userId) {
-      return (dispatch, getState) => {
-        dispatch({
-          type: c[`${nameSpace}__userEdit_initDraft_begin`],
-        });
-        API.users.getOne(userId).then(
-          user=>{
-            setTimeout( ()=>{
+  draftChanged (data) {
+    return (dispatch, getState) => {
+      dispatch({
+        type: c[`${nameSpace}__user_editOrCreate_draft_changed`],
+        payload: { data }
+      });
+    };
+  },
+  darftSubmit(_userId) {
+    if (_userId && !isValid_userId(_userId)) {
+      console.log('[Error] userId is invalid'); // eslint-disable-line no-console
+      return;
+    }
+
+    // const isNew = /^new$/i.test(_userId);
+    // const userId = isNew ? void 0 : _userId;
+    const userId = _userId;
+
+    return (dispatch, getState) => {
+      const draft = _.get(getState(), `modules.${nameSpace}.session.userEditOrCreate.draft`, void 0);
+
+      dispatch({
+        type: c[`${nameSpace}__user_editOrCreate_draft_saveInitiated`],
+        payload: { userId, draft }
+      });
+
+      const draftErrors = _.get(getState(), `modules.${nameSpace}.session.userEditOrCreate.draftErrors`, null);
+      if (draftErrors.length !== 0) {
+        // Cannot send because there are erorrs in form
+        return;
+      }
+
+      // @TODO serialized for api not impliment
+      // const meta = {};
+      // const  = _.cloneDeep( services.serializedForApi(draft, meta) );
+
+      dispatch({
+        type: c[`${nameSpace}__user_editOrCreate_draft_submit_start`],
+        payload: { userId, draft }
+      });
+
+      if (userId) {
+        API.users.update(userId, draft).then(
+          userEdited => {
+            dispatch({
+              type: c[`${nameSpace}__user_editOrCreate_draft_submit_success`],
+              payload: { userId, user:userEdited }
+            });
+
+            // 1) Update store
+            // 2) Navigate to view edited user
+            // 3) Close Draft
               dispatch({
-                type: c[`${nameSpace}__userEdit_initDraft_success`],
-                payload: {user}
+                  type: c[`${nameSpace}__user_editOrCreate_draft_close`],
+                  payload: {}
               });
-              return user;
-            }, 1000);
           }
-        ).catch((err)=>{
+        ).catch( err => {
           dispatch({
-            type: c[`${nameSpace}__userEdit_initDraft_fail`],
+            type: c[`${nameSpace}__user_editOrCreate_draft_submit_fail`],
+            error: err
+          });
+        });
+      } else if (!userId) {
+        API.users.create(draft).then(
+          newUser => {
+            dispatch({
+              type: c[`${nameSpace}__user_editOrCreate_draft_submit_success`],
+              payload: { userId, user:newUser }
+            });
+
+            // 1) Update store
+            // 2) Navigate to view new user
+            // 3) Close Draft
+              dispatch({
+                  type: c[`${nameSpace}__user_editOrCreate_draft_close`],
+                  payload: {}
+              });
+          }
+        ).catch( err => {
+          dispatch({
+            type: c[`${nameSpace}__user_editOrCreate_draft_submit_fail`],
             error: err
           });
         });
       }
-    } else {
-      // create
-    }
+    };
   },
+  draftTearDown() {
+    return (dispatch, getState) => {
+      dispatch({
+        type: c[`${nameSpace}__user_editOrCreate_draft_close`],
+        payload: {}
+      });
+    };
+  }
 }
 
-export default userEditCreate;
+export default user_EditOrCreate;
 
 

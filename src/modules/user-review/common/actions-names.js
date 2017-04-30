@@ -9,6 +9,7 @@ const userCatlog = [
 ];
 
 import userView from '../containers/user-view/action-names';
+import userEditOrCreate from '../containers/user-edit-create/action-names';
 
 /* move the following const to reducers/resources? */
 const resources = [
@@ -20,7 +21,8 @@ const resources = [
 const symbols = [
   ...resources,
   ...userCatlog,
-  ...userView
+  ...userView,
+  ...userEditOrCreate
 ].reduce((acc, eventName) => ({
   ...acc,
   [`${nameSpace}__${eventName}`]: acc[eventName] ? duplicateEventNameError(eventName) : Symbol.for(`${nameSpace}__${eventName}`)
