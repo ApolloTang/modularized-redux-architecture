@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch_draftInit(userId) { dispatch(Action.draftInit(userId) ) },
   dispatch_draftChanged(data) { dispatch(Action.draftChanged(data) ) },
   dispatch_draftSubmit(userId) { dispatch(Action.darftSubmit(userId) ) },
-  dispatch_draftCancel() { dispatch(Action.draftTearDown() ) }
+  dispatch_draftCancel(userId) { dispatch(Action.draftTearDown(userId) ) }
 });
 
 

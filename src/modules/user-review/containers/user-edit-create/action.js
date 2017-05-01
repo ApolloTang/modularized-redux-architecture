@@ -157,12 +157,17 @@ const user_EditOrCreate = {
       }
     };
   },
-  draftTearDown() {
+  draftTearDown(userId) {
     return (dispatch, getState) => {
       dispatch({
         type: c[`${nameSpace}__user_editOrCreate_draft_close`],
         payload: {}
       });
+      if (userId) {
+        dispatch( push(`/users/${userId}`));
+      } else if (!userId) {
+        dispatch( push(`/users`));
+      }
     };
   }
 }

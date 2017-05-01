@@ -25,7 +25,7 @@ class UserView extends React.Component {
     this.props.dispatch_draftSubmit(this._getUserId());
   }
   handle_cancel() {
-    this.props.dispatch_draftCancel();
+    this.props.dispatch_draftCancel(this._getUserId());
   }
   handle_fieldChange (fieldName) {
     return fieldValue => {
