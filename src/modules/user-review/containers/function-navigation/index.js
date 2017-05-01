@@ -29,6 +29,12 @@ class FunctionNavigation extends React.Component {
       ];
     }
 
+    const noUser = /^\/users\/?$/i.test(url);
+
+    if (noUser) {
+      navigationDirective = [ ];
+    }
+
     return(
       <div>
         <SimpleNavigation navigations={navigationDirective}/>
