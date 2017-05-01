@@ -1,9 +1,7 @@
-import fetch from 'isomorphic-fetch';
 
 const get = (url, /* params = {} */ ) => {
-  const headers = {
-    'Content-Type': 'application/json'
-  };
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
 
   const init = {
     method: 'GET',
@@ -12,7 +10,9 @@ const get = (url, /* params = {} */ ) => {
     cache: 'default'
   };
 
-  return fetch(url, init).then(
+  const request = new Request(url, init);
+
+  return fetch(request).then(
     response => {
       if (!response.ok) {
         // https://www.tjvantoll.com/2015/09/13/fetch-and-errors/#comment-2254295840
@@ -25,9 +25,8 @@ const get = (url, /* params = {} */ ) => {
 };
 
 const post = (url, payload, /* opts */ ) => {
-  const headers = {
-    'Content-Type': 'application/json'
-  };
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
 
   const requestBody = JSON.stringify(payload);
 
@@ -39,15 +38,16 @@ const post = (url, payload, /* opts */ ) => {
     body: requestBody
   };
 
-  return fetch(url, init).then(
+  const request = new Request(url, init);
+
+  return fetch(request).then(
     response => response.json()
   );
 };
 
 const put = (url, payload, /* opts */ ) => {
-  const headers = {
-    'Content-Type': 'application/json'
-  };
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
 
   const requestBody = JSON.stringify(payload);
 
@@ -59,15 +59,16 @@ const put = (url, payload, /* opts */ ) => {
     body: requestBody
   };
 
-  return fetch(url, init).then(
+  const request = new Request(url, init);
+
+  return fetch(request).then(
     response => response.json()
   );
 };
 
 const del = (url) => {
-  const headers = {
-    'Content-Type': 'application/json'
-  };
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
 
   const init = {
     method: 'DELETE',
@@ -76,7 +77,9 @@ const del = (url) => {
     cache: 'default',
   };
 
-  return fetch(url, init).then(
+  const request = new Request(url, init);
+
+  return fetch(request).then(
     response => response.json()
   );
 };

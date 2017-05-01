@@ -17,15 +17,16 @@ const userCatelog = {
       dispatch({
         type: c[`${nameSpace}__userCatelog_fetch_begin`],
       });
-      API.userCatelog.getAll().then(
+      return API.userCatelog.getAll().then(
         userCatelog=>{
-          setTimeout( ()=>{
+          // setTimeout( ()=>{
             const ids_userCatelog = userCatelog.map( user=>user._id);
+
             dispatch({
               type: c[`${nameSpace}__userCatelog_fetch_success`],
               payload: { ids_userCatelog }
             });
-          }, 1000)
+          // },1000);
         },
         err=>{
           dispatch({
