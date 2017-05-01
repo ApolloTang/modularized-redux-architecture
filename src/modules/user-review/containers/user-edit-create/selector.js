@@ -3,13 +3,13 @@ import Action from './action';
 import {nameSpace} from '../../config';
 
 const mapStoreToProps = store=>{
-  const users = _.get(store, `modules.${nameSpace}.resources.users`, null);
   const isLoading = _.get(store, `modules.${nameSpace}.session.userEditOrCreate.isLoading`, true);
   const httpError = _.get(store, `modules.${nameSpace}.session.userEditOrCreate.httpError`, void 0);
+  const draft = _.get(store, `modules.${nameSpace}.session.userEditOrCreate.draft`, void 0);
   return {
-    users,
     isLoading,
-    httpError
+    httpError,
+    draft
   }
 };
 

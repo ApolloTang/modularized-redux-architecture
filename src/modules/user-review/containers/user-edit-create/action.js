@@ -6,9 +6,6 @@ import API from '../../services/api';
 import { push } from 'connected-react-router'
 import Action_userCatelog from  '../user-catelog/action'
 
-function isValid_userId(userId) {
-  return (userId.match(/^[0-9a-fA-F]{24}$/) || userId.match(/^new$/i));
-};
 
 const user_EditOrCreate = {
   draftInit (_userId) {
@@ -18,15 +15,6 @@ const user_EditOrCreate = {
         payload: { userId: _userId }
       });
 
-      ///// decide to let server handle this
-      //
-      // if (_userId && !isValid_userId(_userId)) {
-      //   console.log('[Error] userId is invalid'); // eslint-disable-line no-console
-      //   return;
-      // }
-
-      // const isNew = /^new$/i.test(_userId);
-      // const userId = isNew ? void 0 : _userId;
       const userId = _userId;
 
       // const draft_default = {...(_.cloneDeep(services.draftDefaultValues)) }; // @TODO
@@ -87,13 +75,6 @@ const user_EditOrCreate = {
     };
   },
   darftSubmit(_userId) {
-    if (_userId && !isValid_userId(_userId)) {
-      console.log('[Error] userId is invalid'); // eslint-disable-line no-console
-      return;
-    }
-
-    // const isNew = /^new$/i.test(_userId);
-    // const userId = isNew ? void 0 : _userId;
     const userId = _userId;
 
     return (dispatch, getState) => {
