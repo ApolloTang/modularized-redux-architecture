@@ -14,14 +14,12 @@ class ModuleRoot extends Component {
     super(props);
   }
   render() {
-
-    // console.log('user-review props: ', this.props)
-    // console.log('user-review FunctionNavigation: ', FunctionNavigation)
+    const userIdInParam = this.props.match.params.userId;
     return (
       <Layout
         className={`user-review ${style['module-style']}`}
-        UserCatelog={<UserCatelog/>}
-        FunctionNavigation={<FunctionNavigation userId={this.props.match.params.userId}/>}
+        UserCatelog={<UserCatelog />}
+        FunctionNavigation={<FunctionNavigation {...this.props} />}
         routes={routes}
         />
     );

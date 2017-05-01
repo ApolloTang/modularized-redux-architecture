@@ -5,25 +5,36 @@ import { Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 
 import {mapStoreToProps, mapDispatchToProps} from './selector';
 
-
 import SimpleNavigation from 'widgets/simple-navigation';
 
-const FunctionNavigation = (props)=>{
-  const selectedUserId = props.selectedUserId ; // this will be read from session
+class FunctionNavigation extends React.Component {
 
-  const navigationDirective = [
-    {to:'/users/new', displayText:'Add User'},
-    {to:`/users/${selectedUserId}/edit`, displayText:'Edit User'},
-    {to:`/users/${selectedUserId}/assign`, displayText:'Assign Review'},
-    {to:`/users/${selectedUserId}/give-review`, displayText:'Give Review'},
-    {to:`/users/${selectedUserId}/view-review`, displayText:'View Review'},
-  ];
+  render() {
+    const id_selectedUser = this.props.id_selectedUser ; // this is read from session.userCatelog
 
-  return(
-    <div>
-      <SimpleNavigation navigations={navigationDirective}/>
-    </div>
-  )
+    let navigationDirective = [
+      {to:'/users/new', displayText:'Add User'},
+      {to:`/users/${id_selectedUser}/edit`, displayText:'Edit User'},
+      {to:`/users/${id_selectedUser}/assign`, displayText:'Assign Review'},
+      {to:`/users/${id_selectedUser}/give-review`, displayText:'Give Review'},
+      {to:`/users/${id_selectedUser}/view-review`, displayText:'View Review'},
+    ];
+
+    const url = this.props.match.url;
+    const isCreate = /^\/users\/new\/?$/i.test(url);
+
+    if (isCreate) {
+      navigationDirective = [
+        {to:'/users/new', displayText:'Add User'},
+      ];
+    }
+
+    return(
+      <div>
+        <SimpleNavigation navigations={navigationDirective}/>
+      </div>
+    )
+  }
 }
 
 export default connect(mapStoreToProps, mapDispatchToProps)(FunctionNavigation);

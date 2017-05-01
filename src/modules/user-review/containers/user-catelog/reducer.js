@@ -5,7 +5,7 @@ import {combineReducers} from 'redux';
 
 const initialState = {
   isLoading: true,
-  id_selectedUser: null,
+  id_selectedUser: void 0,
   httpError: null,
   ids_userCatelog: []
 }

@@ -6,10 +6,12 @@ const mapStoreToProps = store=>{
   const userCatelog = _.get(store, `modules.${nameSpace}.resources.userCatelog`, null);
   const isLoading = _.get(store, `modules.${nameSpace}.session.userCatelog.isLoading`, true);
   const ids_userCatelog = _.get(store, `modules.${nameSpace}.session.userCatelog.ids_userCatelog`, void 0);
+  const id_selectedUser = _.get(store, `modules.${nameSpace}.session.userCatelog.id_selectedUser`, void 0);
   return {
     userCatelog,
     isLoading,
-    ids_userCatelog
+    ids_userCatelog,
+    id_selectedUser
   }
 };
 

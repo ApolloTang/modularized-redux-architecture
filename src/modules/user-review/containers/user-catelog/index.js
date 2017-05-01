@@ -6,8 +6,8 @@ import { Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 import {mapStoreToProps, mapDispatchToProps} from './selector';
 
 
-const UserItem = ({ displayName, id, selectUser }) => (
-  <div>
+const UserItem = ({ displayName, id, selectUser, id_selectedUser }) => (
+  <div className={(id===id_selectedUser) ? 'is-active' : ''} >
     <NavLink
       onClick={(e)=>selectUser(id)}
       to={`/users/${id}`}
@@ -15,7 +15,7 @@ const UserItem = ({ displayName, id, selectUser }) => (
   </div>
 );
 
-const UserList = ({userCatelog, selectUser})=>{
+const UserList = ({userCatelog, selectUser, id_selectedUser})=>{
   const ids = Object.keys(userCatelog);
   return (
     <div>
@@ -24,6 +24,7 @@ const UserList = ({userCatelog, selectUser})=>{
         return(
           <UserItem
             key={id}
+            id_selectedUser={id_selectedUser}
             id={id}
             displayName={displayName}
             selectUser={selectUser}
@@ -59,6 +60,7 @@ class UserCatalog extends React.Component {
     ):(
       <div>
         <UserList
+          id_selectedUser={this.props.id_selectedUser}
           userCatelog={this.props.userCatelog}
           selectUser = {this.handle_selectUser}
         />
