@@ -79,6 +79,7 @@
     "testPathIgnorePatterns": [
       "<rootDir>/dist/",
       "<rootDir>/node_modules/",
+      "<rootDir>/src/modules/demo-unit-test-action",
       "<rootDir>/src/modules/reducer-test"
     ],
     "moduleNameMapper": {
