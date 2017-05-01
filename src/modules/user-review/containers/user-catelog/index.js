@@ -36,6 +36,7 @@ const UserList = ({userCatelog, selectUser, id_selectedUser})=>{
 }
 
 
+import style from './style.less';
 class UserCatalog extends React.Component {
   constructor(props) {
     super(props);
@@ -58,7 +59,8 @@ class UserCatalog extends React.Component {
         <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
       </div>
     ):(
-      <div>
+      <div
+        className={`userCatelog ${style['module-style']}`} >
         <UserList
           id_selectedUser={this.props.id_selectedUser}
           userCatelog={this.props.userCatelog}
