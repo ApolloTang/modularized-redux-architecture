@@ -54,6 +54,7 @@
     "connected-react-router": "4.1.0",
     "lodash": "^4.17.4",
     "numeral": "^2.0.6",
+    "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
@@ -71,6 +72,11 @@
     "moduleDirectories": [
       "node_modules",
       "src"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/modules/reducer-test"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
