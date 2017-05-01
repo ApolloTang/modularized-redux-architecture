@@ -1,8 +1,14 @@
 const DEBUG = (process && process.env && process.env.debug === true)
 const PROD = (process && process.env && process.env.prod === true)
+const TEST = (process && process.env && process.env.NODE_ENV === 'test');
 
-export default {
+const isOnForTest_reduxLogger = false;
+const shouldPersistStoreState = false;
+
+export {
     DEBUG,
     PROD,
-    shouldPersistStoreState: false
-}
+    TEST,
+    isOnForTest_reduxLogger,
+    shouldPersistStoreState
+};

@@ -1,4 +1,4 @@
-const PROD = (process && process.env && process.env.PROD === true);
+import {TEST, PROD, isOnForTest_reduxLogger} from 'root/config';
 
 import {history} from 'root/createHistory';
 import thunk from 'redux-thunk';
@@ -10,13 +10,10 @@ const middleware = [
     routerMiddleware(history), // for dispatching history actions
 ];
 
-// if (PROD) {
-//     middleware.push(
-//         createLogger()
-//     );
-// }
-
-if (!PROD) {
+if (
+  (TEST && isOnForTest_reduxLogger)
+  || (!PROD && !TEST)
+) {
     middleware.push(
         createLogger()
     );

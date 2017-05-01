@@ -1,5 +1,4 @@
-import config from './config';
-const {PROD, shouldPersistStoreState } = config;
+import {PROD, shouldPersistStoreState } from  './config';
 
 import {createStore, applyMiddleware, compose} from 'redux';
 import rootReducer from './reducers';
