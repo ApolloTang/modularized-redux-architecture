@@ -19,14 +19,24 @@ const userCatelog = {
       });
       return API.userCatelog.getAll().then(
         userCatelog=>{
-          // setTimeout( ()=>{
-            const ids_userCatelog = userCatelog.map( user=>user._id);
+          console.log('aaaaaaaaaa:, process: ', process.env.NODE_ENV);
+          if (process && process.env.NODE_ENV === 'test') {
+              const ids_userCatelog = userCatelog.map( user=>user._id);
 
-            dispatch({
-              type: c[`${nameSpace}__userCatelog_fetch_success`],
-              payload: { ids_userCatelog }
-            });
-          // },1000);
+              dispatch({
+                type: c[`${nameSpace}__userCatelog_fetch_success`],
+                payload: { ids_userCatelog }
+              });
+          } else {
+            setTimeout( ()=>{
+              const ids_userCatelog = userCatelog.map( user=>user._id);
+
+              dispatch({
+                type: c[`${nameSpace}__userCatelog_fetch_success`],
+                payload: { ids_userCatelog }
+              });
+            },1000);
+          }
         },
         err=>{
           dispatch({
