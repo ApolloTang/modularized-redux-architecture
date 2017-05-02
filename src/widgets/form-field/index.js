@@ -1,18 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-export default React.createClass({
-  propTypes: {
-      label: React.PropTypes.string,
-      description: React.PropTypes.string,
-      tooltip: React.PropTypes.object,
-      errors: React.PropTypes.array,
-      showErrors: React.PropTypes.bool,
-      isRequired: React.PropTypes.bool,
-      className: React.PropTypes.string,
-  },
 
+class FormField extends React.Component {
   render() {
     const {
       label,
@@ -53,4 +45,15 @@ export default React.createClass({
       </div>
     );
   }
-});
+};
+FormField.propTypes = {
+  label: React.PropTypes.string,
+  description: React.PropTypes.string,
+  tooltip: React.PropTypes.object,
+  errors: React.PropTypes.array,
+  showErrors: React.PropTypes.bool,
+  isRequired: React.PropTypes.bool,
+  className: React.PropTypes.string
+};
+
+export default FormField;
