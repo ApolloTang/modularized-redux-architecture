@@ -71,13 +71,14 @@ const user_EditOrCreate = {
     }
   },
   draftChanged (data) {
-    return (dispatch, getState) => {
-      dispatch({
-        type: c[`${nameSpace}__user_editOrCreate_draft_changed`],
-        payload: { data }
-      });
-    };
-  },
+    return (dispatch, getState) => Promise.resolve().then(
+      ()=>{
+        dispatch({
+          type: c[`${nameSpace}__user_editOrCreate_draft_changed`],
+          payload: { data }
+        });
+      }
+  )},
   darftSubmit(_userId) {
     const userId = _userId;
 
