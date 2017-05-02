@@ -83,8 +83,6 @@ const user_EditOrCreate = {
     const userId = _userId;
 
     return (dispatch, getState) => {
-      console.log('xxxxxxxxx: ', JSON.stringify(getState()));
-
       const draft = _.get(getState(), `modules.${nameSpace}.session.userEditOrCreate.draft`, void 0);
 
       dispatch({

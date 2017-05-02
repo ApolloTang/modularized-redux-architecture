@@ -89,10 +89,20 @@ describe(`
     it(`
       :::: user-edit-create/action.draftSubmit(userId)
         on evoke it should:
-          - dispatch "__user_editOrCreate_draft_submit_start" action
+          - dispatch "__user_editOrCreate_draft_saveInitiated" action with
+            payload contain draft and userId
         then it should:
-          - dispatch "__user_editOrCreate_draft_submit_success" action and return the draft
-    `, () => {
+          - dispatch "__user_editOrCreate_draft_submit_start" action with
+            payload contain draft and userId
+        when draft is saved by mock server, it should:
+          - dispatch "__user_editOrCreate_draft_submit_success" action with
+            payload contain the updated userObject and same userId
+        then it should:
+          - dispatch "__userCatelog_fetch_begin" action
+        finally it should:
+          - dispatch "@@router/CALL_HISTORY_METHOD" action with payload of
+            {'args': ['/users/userId'], 'method': 'push'}
+      `, () => {
         const userId = '5905fc6dc7bcb70a06f9397c';
         const draft = {
           "name": "previous"
@@ -108,7 +118,9 @@ describe(`
         const expectedActions = [
           { 'type': c[`${nameSpace}__user_editOrCreate_draft_saveInitiated` ], 'payload': {'draft': {'name': 'previous'}, 'userId':userId} },
           { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_start` ], 'payload': {'draft': {'name': 'previous'}, 'userId':userId} },
-          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_success`], 'payload': {'draft': {'name': 'newName'}} }
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_success`], 'payload': {'user': receiveUser, 'userId':userId } },
+          { 'type': c[`${nameSpace}__userCatelog_fetch_begin`]},
+          { 'type': '@@router/CALL_HISTORY_METHOD', 'payload': {'args': [`/users/${userId}`], 'method': 'push'}   }
         ];
         const store = mockStore({
           modules: {
@@ -124,36 +136,29 @@ describe(`
         });
         return store.dispatch(actions.darftSubmit(userId))
           .then((arg) => {
-              console.log('0 Received: type : ', store.getActions()[0].type);
-              console.log('0 Expected: type : ', expectedActions[0].type);
+              // console.log('0 Received: type : ', store.getActions()[0].type);
+              // console.log('0 Expected: type : ', expectedActions[0].type);
               expect(store.getActions()[0].type).toBe(expectedActions[0].type)
-              console.log('0 Received: payload : ', store.getActions()[0].payload);
-              console.log('0 Expected: payload : ', expectedActions[0].payload);
+              // console.log('0 Received: payload : ', store.getActions()[0].payload);
+              // console.log('0 Expected: payload : ', expectedActions[0].payload);
               expect(store.getActions()[0].payload).toEqual(expectedActions[0].payload)
-              console.log('1 Received: type : ', store.getActions()[1].type);
-              console.log('1 Expected: type : ', expectedActions[1].type);
+              // console.log('1 Received: type : ', store.getActions()[1].type);
+              // console.log('1 Expected: type : ', expectedActions[1].type);
               expect(store.getActions()[1].type).toBe(expectedActions[1].type)
-              console.log('1 Received: payload : ', store.getActions()[1].payload);
-              console.log('1 Expected: payload : ', expectedActions[1].payload);
+              // console.log('1 Received: payload : ', store.getActions()[1].payload);
+              // console.log('1 Expected: payload : ', expectedActions[1].payload);
               expect(store.getActions()[1].payload).toEqual(expectedActions[1].payload)
-              console.log('2 Received: type : ', store.getActions()[2].type);
-              console.log('2 Expected: type : ', expectedActions[2].type);
+              // console.log('2 Received: type : ', store.getActions()[2].type);
+              // console.log('2 Expected: type : ', expectedActions[2].type);
               expect(store.getActions()[2].type).toBe(expectedActions[2].type)
-              console.log('2 Received: type : ', store.getActions()[2]);
-              console.log('2 Expected: type : ', expectedActions[2]);
-              expect(store.getActions()[2].type).toBe(expectedActions[2].type)
-              // console.log('action:0: payload.draft.name  to be equal', store.getActions()[0].payload.draft.namee)
-              // expect((store.getActions()[0].payload.draft.name)).toEqual(Object.keys(expectedActions[0].payload.draft.name))
-
-            // console.log('xxxxxx:0 ', store.getActions()[0])
-            // console.log('xxxxxx:0.payload.darft.userId ', store.getActions()[0].payload.userId)
-            // console.log('xxxxxx:1 ', store.getActions()[1])
-            // console.log('xxxxxx:2 ', store.getActions()[2])
-            //
-            // expect((store.getActions()[0].payload.userId)).toEqual(Object.keys(expectedActions[0].payload.userId))
-            // expect(store.getActions()[0]['type']).toEqual(expectedActions[0]['type'])
-            // expect(store.getActions()[1]['type']).toEqual(expectedActions[1]['type'])
-            // expect(store.getActions()).toEqual(expectedActions)
+              // console.log('2 Received: payload : ', store.getActions()[2].payload);
+              // console.log('2 Expected: payload : ', expectedActions[2].payload);
+              expect(store.getActions()[2].payload).toEqual(expectedActions[2].payload)
+              // console.log('3 Received: type : ', store.getActions()[3].type);
+              // console.log('3 Expected: type : ', expectedActions[3].type);
+              expect(store.getActions()[3].type).toEqual(expectedActions[3].type)
+              expect(store.getActions()[3]).toEqual(expectedActions[3])
+              expect(store.getActions()[4]).toEqual(expectedActions[4])
           })
 
     }); // End user-edit-create/action.darftSubmit(userId)
