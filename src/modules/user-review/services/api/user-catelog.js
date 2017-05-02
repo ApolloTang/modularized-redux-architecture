@@ -8,7 +8,7 @@ import {nameSpace, rootUrl} from '../../config';
 const userCatelog = {
   getAll() {
     return createHttp
-      .get(`${rootUrl}/users`)
+      .get(`${rootUrl}/userCatelog`)
       .then(
         userCatelog => {
           store.dispatch( {
