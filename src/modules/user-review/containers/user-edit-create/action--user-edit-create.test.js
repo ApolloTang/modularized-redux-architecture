@@ -84,4 +84,50 @@ describe(`
               expect(store.getActions()).toEqual(expectedActions)
             });
     }); // End user-edit-create/action.draftChanged(data)
+
+
+    it(`
+      :::: user-edit-create/action.draftSubmit(userId)
+        on evoke it should:
+          - dispatch "__user_editOrCreate_draft_submit_start" action
+        then it should:
+          - dispatch "__user_editOrCreate_draft_submit_success" action and return the draft
+    `, () => {
+        const userId = '5905fc6dc7bcb70a06f9397c';
+        const draft = {
+          "name": "ooooo"
+        };
+        const user = {
+          "__v": 0,
+          "_id": "5905fc6dc7bcb70a06f9397c",
+          "name": "ooooo"
+        };
+        nock(api_urlAndPort)
+          .put('/api/users/5905fc6dc7bcb70a06f9397c', draft)
+          .reply(200, user);
+        const expectedActions = [
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_start`]},
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_success`], 'payload': {'draft': {'name': 'kkk'}} }
+        ];
+      const store = mockStore({
+        modules: {
+          userReview: {
+            session: {
+              userEditOrCreate: {
+                draft: draft,
+                draftErrors: []
+              }
+            }
+          }
+        }
+      });
+        return store.dispatch(actions.darftSubmit(userId))
+          .then((arg) => {
+            expect(store.getActions()).toEqual(expectedActions)
+          })
+
+    }); // End user-edit-create/action.darftSubmit(userId)
+
+
+    // don't for get create is reply with 201
   });

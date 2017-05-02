@@ -83,6 +83,8 @@ const user_EditOrCreate = {
     const userId = _userId;
 
     return (dispatch, getState) => {
+      console.log('xxxxxxxxx: ', JSON.stringify(getState()));
+
       const draft = _.get(getState(), `modules.${nameSpace}.session.userEditOrCreate.draft`, void 0);
 
       dispatch({
@@ -106,7 +108,7 @@ const user_EditOrCreate = {
       });
 
       if (userId) {
-        API.users.update(userId, draft).then(
+        return API.users.update(userId, draft).then(
           userEdited => {
             dispatch({
               type: c[`${nameSpace}__user_editOrCreate_draft_submit_success`],
