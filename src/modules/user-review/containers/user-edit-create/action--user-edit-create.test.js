@@ -95,35 +95,65 @@ describe(`
     `, () => {
         const userId = '5905fc6dc7bcb70a06f9397c';
         const draft = {
-          "name": "ooooo"
+          "name": "previous"
         };
-        const user = {
+        const receiveUser = {
           "__v": 0,
           "_id": "5905fc6dc7bcb70a06f9397c",
-          "name": "ooooo"
+          "name": "newName"
         };
         nock(api_urlAndPort)
           .put('/api/users/5905fc6dc7bcb70a06f9397c', draft)
-          .reply(200, user);
+          .reply(200, receiveUser);
         const expectedActions = [
-          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_start`]},
-          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_success`], 'payload': {'draft': {'name': 'kkk'}} }
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_saveInitiated` ], 'payload': {'draft': {'name': 'previous'}, 'userId':userId} },
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_start` ], 'payload': {'draft': {'name': 'previous'}, 'userId':userId} },
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_success`], 'payload': {'draft': {'name': 'newName'}} }
         ];
-      const store = mockStore({
-        modules: {
-          userReview: {
-            session: {
-              userEditOrCreate: {
-                draft: draft,
-                draftErrors: []
+        const store = mockStore({
+          modules: {
+            userReview: {
+              session: {
+                userEditOrCreate: {
+                  draft: draft,
+                  draftErrors: []
+                }
               }
             }
           }
-        }
-      });
+        });
         return store.dispatch(actions.darftSubmit(userId))
           .then((arg) => {
-            expect(store.getActions()).toEqual(expectedActions)
+              console.log('0 Received: type : ', store.getActions()[0].type);
+              console.log('0 Expected: type : ', expectedActions[0].type);
+              expect(store.getActions()[0].type).toBe(expectedActions[0].type)
+              console.log('0 Received: payload : ', store.getActions()[0].payload);
+              console.log('0 Expected: payload : ', expectedActions[0].payload);
+              expect(store.getActions()[0].payload).toEqual(expectedActions[0].payload)
+              console.log('1 Received: type : ', store.getActions()[1].type);
+              console.log('1 Expected: type : ', expectedActions[1].type);
+              expect(store.getActions()[1].type).toBe(expectedActions[1].type)
+              console.log('1 Received: payload : ', store.getActions()[1].payload);
+              console.log('1 Expected: payload : ', expectedActions[1].payload);
+              expect(store.getActions()[1].payload).toEqual(expectedActions[1].payload)
+              console.log('2 Received: type : ', store.getActions()[2].type);
+              console.log('2 Expected: type : ', expectedActions[2].type);
+              expect(store.getActions()[2].type).toBe(expectedActions[2].type)
+              console.log('2 Received: type : ', store.getActions()[2]);
+              console.log('2 Expected: type : ', expectedActions[2]);
+              expect(store.getActions()[2].type).toBe(expectedActions[2].type)
+              // console.log('action:0: payload.draft.name  to be equal', store.getActions()[0].payload.draft.namee)
+              // expect((store.getActions()[0].payload.draft.name)).toEqual(Object.keys(expectedActions[0].payload.draft.name))
+
+            // console.log('xxxxxx:0 ', store.getActions()[0])
+            // console.log('xxxxxx:0.payload.darft.userId ', store.getActions()[0].payload.userId)
+            // console.log('xxxxxx:1 ', store.getActions()[1])
+            // console.log('xxxxxx:2 ', store.getActions()[2])
+            //
+            // expect((store.getActions()[0].payload.userId)).toEqual(Object.keys(expectedActions[0].payload.userId))
+            // expect(store.getActions()[0]['type']).toEqual(expectedActions[0]['type'])
+            // expect(store.getActions()[1]['type']).toEqual(expectedActions[1]['type'])
+            // expect(store.getActions()).toEqual(expectedActions)
           })
 
     }); // End user-edit-create/action.darftSubmit(userId)
