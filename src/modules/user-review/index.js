@@ -18,7 +18,7 @@ class ModuleRoot extends Component {
     return (
       <Layout
         className={`user-review ${style['module-style']}`}
-        UserCatelog={<UserCatelog />}
+        UserCatelog={<UserCatelog {...this.props}/>}
         FunctionNavigation={<FunctionNavigation {...this.props} />}
         routes={routes}
         />

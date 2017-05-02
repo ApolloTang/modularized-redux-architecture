@@ -52,6 +52,8 @@
     "webpack-dev-server": "^2.4.4"
   },
   "dependencies": {
+    "babel-plugin-transform-bluebird": "^0.1.1",
+    "bluebird": "^3.5.0",
     "classnames": "^2.2.5",
     "connected-react-router": "4.1.0",
     "isomorphic-fetch": "^2.2.1",

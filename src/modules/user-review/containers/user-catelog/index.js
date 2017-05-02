@@ -6,16 +6,15 @@ import { Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 import {mapStoreToProps, mapDispatchToProps} from './selector';
 
 
-const UserItem = ({ displayName, id, selectUser, id_selectedUser }) => (
+const UserItem = ({ displayName, id, id_selectedUser }) => (
   <div className={(id===id_selectedUser) ? 'is-active' : ''} >
     <NavLink
-      onClick={(e)=>selectUser(id)}
       to={`/users/${id}`}
       activeClassName="is-active">{displayName}</NavLink>
   </div>
 );
 
-const UserList = ({userCatelog, selectUser, id_selectedUser})=>{
+const UserList = ({userCatelog, id_selectedUser})=>{
   const ids = Object.keys(userCatelog);
   return (
     <div>
@@ -27,7 +26,6 @@ const UserList = ({userCatelog, selectUser, id_selectedUser})=>{
             id_selectedUser={id_selectedUser}
             id={id}
             displayName={displayName}
-            selectUser={selectUser}
           />
         );
       }) }
@@ -40,7 +38,6 @@ import style from './style.less';
 class UserCatalog extends React.Component {
   constructor(props) {
     super(props);
-    this.handle_selectUser = this.handle_selectUser.bind(this);
     this.handle_getUserCatelog = this.handle_getUserCatelog.bind(this);
   }
   componentDidMount() {
@@ -50,10 +47,8 @@ class UserCatalog extends React.Component {
   handle_getUserCatelog() {
     this.props.dispatch_fetchUserCatelog();
   }
-  handle_selectUser(userId) {
-    this.props.dispatch_selectUser(userId);
-  }
   render() {
+    const userIdInParam = this.props.match.params.userId
     return (this.props.isLoading) ? (
       <div>
         <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
@@ -62,7 +57,7 @@ class UserCatalog extends React.Component {
       <div
         className={`userCatelog ${style['module-style']}`} >
         <UserList
-          id_selectedUser={this.props.id_selectedUser}
+          id_selectedUser={userIdInParam}
           userCatelog={this.props.userCatelog}
           selectUser = {this.handle_selectUser}
         />

@@ -1,5 +1,5 @@
 import c from '../../common/actions-names';
-import {nameSpace} from '../../config';
+import {nameSpace, api_urlAndPort} from '../../config';
 
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
@@ -9,19 +9,23 @@ import nock from 'nock'
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
-describe('async actions', () => {
+describe(`
+  :::::::::::::::::::::::::::::::::::::::::::::
+  ::            Aync Action Test             ::
+  ::          user-catelog container         ::
+  :::::::::::::::::::::::::::::::::::::::::::::
+  `, () => {
   afterEach(() => {
     nock.cleanAll()
   })
 
-  it('creates c[`${nameSpace}__userCatelog_fetch_begin`] when userCatelog.init() is dispatch', () => {
-    const store = mockStore();
-    const expectedActions = { type: c[`${nameSpace}__userCatelog_fetch_begin`] };
-    store.dispatch( actions.init() );
-  });
-
-
-  it('creates FETCH_TODOS_SUCCESS when fetching todos has been done', () => {
+  it(`
+    :::: user-caterlog/fetchUserCatelog()
+      on evoke it should:
+        - dispatch "__userCatelog_fetch_begin" action
+      then it should:
+        - dispatch "__userCatelog_fetch_success with a payload of user's ids
+  `, () => {
 
     const userCatelog = [
       {
@@ -38,8 +42,8 @@ describe('async actions', () => {
 
     const ids_userCatelog = userCatelog.map( user=>user._id);
 
-    nock('http://localhost:3000')
-      .get('/api/users')
+    nock(api_urlAndPort)
+      .get('/api/userCatelog')
       .reply(200, userCatelog)
 
 
