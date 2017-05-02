@@ -132,11 +132,12 @@ const user_EditOrCreate = {
           });
         });
       } else if (!userId) {
-        API.users.create(draft).then(
+        return API.users.create(draft).then(
           newUser => {
+            const userId_new = _.get(newUser, `_id`, '[Error] missing user Id');
             dispatch({
               type: c[`${nameSpace}__user_editOrCreate_draft_submit_success`],
-              payload: { userId, user:newUser }
+              payload: { userId: userId_new, user:newUser }
             });
 
             const newId = newUser._id;

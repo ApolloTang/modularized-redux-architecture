@@ -164,5 +164,82 @@ describe(`
     }); // End user-edit-create/action.darftSubmit(userId)
 
 
+    it(`
+      :::: user-edit-create/action.draftSubmit(undefined)
+        on evoke it should:
+          - dispatch "__user_editOrCreate_draft_saveInitiated" action with
+            payload contain draft and userId
+        then it should:
+          - dispatch "__user_editOrCreate_draft_submit_start" action with
+            payload contain draft and userId
+        when draft is saved by mock server, it should:
+          - dispatch "__user_editOrCreate_draft_submit_success" action with
+            payload contain the newly created userObject and new userId
+        then it should:
+          - dispatch "__userCatelog_fetch_begin" action
+        finally it should:
+          - dispatch "@@router/CALL_HISTORY_METHOD" action with payload of
+            {'args': ['/users/newUserId'], 'method': 'push'}
+      `, () => {
+        const userId = void 0;
+        const draft = {
+          "name": "toBeCreated"
+        };
+        const createdUser = {
+          "__v": 0,
+          "_id": "5905fc6dc7bcb70a06f9397c",
+          "name": "toBeCreated"
+        };
+        const id_created = createdUser._id;
+        nock(api_urlAndPort)
+          .post('/api/users', draft)
+          .reply(200, createdUser);
+        const expectedActions = [
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_saveInitiated` ], 'payload': {'draft': {'name': 'toBeCreated'}, 'userId':userId} },
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_start` ], 'payload': {'draft': {'name': 'toBeCreated'}, 'userId':userId} },
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_submit_success`], 'payload': {'user': createdUser, 'userId':id_created } },
+          { 'type': c[`${nameSpace}__userCatelog_fetch_begin`]},
+          { 'type': '@@router/CALL_HISTORY_METHOD', 'payload': {'args': [`/users/${id_created}`], 'method': 'push'}   }
+        ];
+        const store = mockStore({
+          modules: {
+            userReview: {
+              session: {
+                userEditOrCreate: {
+                  draft: draft,
+                  draftErrors: []
+                }
+              }
+            }
+          }
+        });
+        return store.dispatch(actions.darftSubmit(void 0))
+          .then((arg) => {
+              // console.log('0 Received: type : ', store.getActions()[0].type);
+              // console.log('0 Expected: type : ', expectedActions[0].type);
+              expect(store.getActions()[0].type).toBe(expectedActions[0].type)
+              // console.log('0 Received: payload : ', store.getActions()[0].payload);
+              // console.log('0 Expected: payload : ', expectedActions[0].payload);
+              expect(store.getActions()[0].payload).toEqual(expectedActions[0].payload)
+              // // console.log('1 Received: type : ', store.getActions()[1].type);
+              // // console.log('1 Expected: type : ', expectedActions[1].type);
+              expect(store.getActions()[1].type).toBe(expectedActions[1].type)
+              // // console.log('1 Received: payload : ', store.getActions()[1].payload);
+              // // console.log('1 Expected: payload : ', expectedActions[1].payload);
+              expect(store.getActions()[1].payload).toEqual(expectedActions[1].payload)
+              // // console.log('2 Received: type : ', store.getActions()[2].type);
+              // // console.log('2 Expected: type : ', expectedActions[2].type);
+              expect(store.getActions()[2].type).toBe(expectedActions[2].type)
+              // // console.log('2 Received: payload : ', store.getActions()[2].payload);
+              // // console.log('2 Expected: payload : ', expectedActions[2].payload);
+              expect(store.getActions()[2].payload).toEqual(expectedActions[2].payload)
+              // // console.log('3 Received: type : ', store.getActions()[3].type);
+              // // console.log('3 Expected: type : ', expectedActions[3].type);
+              expect(store.getActions()[3].type).toEqual(expectedActions[3].type)
+              expect(store.getActions()[3]).toEqual(expectedActions[3])
+              expect(store.getActions()[4]).toEqual(expectedActions[4])
+          })
+
+    }); // End user-edit-create/action.darftSubmit(userId)
     // don't for get create is reply with 201
   });
