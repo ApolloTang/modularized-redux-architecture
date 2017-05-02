@@ -1,3 +1,5 @@
+import {TEST, PROD, isOnForTest_reduxLogger} from 'root/config';
+
 import c from '../../common/actions-names';
 import {nameSpace} from '../../config';
 
@@ -19,10 +21,9 @@ const userView = {
       dispatch({
         type: c[`${nameSpace}__userView_fetch_begin`],
       });
-      API.users.getOne(userId).then(
-      // API.users.getOne('432434234').then( //<--- for testing not found
+      return API.users.getOne(userId).then(
         user=>{
-          setTimeout( ()=>{
+          const worker_apiUserGetOne = function worker_apiUserGetOne(user) {
             if ( user.hasOwnProperty('httpError')) {
               const httpError = user.httpError;
               dispatch({
@@ -37,7 +38,13 @@ const userView = {
               });
               return user;
             }
-          }, 1000);
+          }
+          if (!TEST && !PROD) {
+            // simulate delay
+            setTimeout( ()=>{ worker_apiUserGetOne(user); }, 1000);
+          } else if (TEST) {
+             worker_apiUserGetOne(user);
+          }
         },
         (err)=>{
           dispatch({
@@ -53,8 +60,7 @@ const userView = {
       dispatch({
         type: c[`${nameSpace}__userView_delete_begin`],
       });
-      API.users.del(userId).then(
-      // API.users.del('432434234').then( //<--- for testing not found
+      return API.users.del(userId).then(
         user=>{
           dispatch({
             type: c[`${nameSpace}__userView_delete_success`],
