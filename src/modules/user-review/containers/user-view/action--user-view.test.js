@@ -1,5 +1,5 @@
 import c from '../../common/actions-names';
-import {nameSpace} from '../../config';
+import {nameSpace, api_urlAndPort} from '../../config';
 
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
@@ -30,7 +30,7 @@ describe( `
           "name": "kkk"
         };
 
-        nock('http://localhost:3000')
+        nock(api_urlAndPort)
           .get('/api/users/5905fc6dc7bcb70a06f9397c')
           .reply(200, user)
 
@@ -39,7 +39,7 @@ describe( `
           {"type": c[`${nameSpace}__userView_fetch_success`], "payload": { user }   }
         ];
 
-        const store = mockStore({ todos: [] })
+        const store = mockStore({})
 
         return store.dispatch(actions.fetchUser(userId))
           .then((arg) => {
@@ -58,7 +58,7 @@ describe( `
         const httpError = { };
         const user = { httpError };
 
-        nock('http://localhost:3000')
+        nock(api_urlAndPort)
           .get('/api/users/5905fc6dc7bcb70a06f9397c')
           .reply(404)
 
@@ -93,7 +93,7 @@ describe( `
           "name": "kkk"
         };
 
-        nock('http://localhost:3000')
+        nock(api_urlAndPort)
           .delete('/api/users/5905fc6dc7bcb70a06f9397c')
           .reply(200, user)
 
