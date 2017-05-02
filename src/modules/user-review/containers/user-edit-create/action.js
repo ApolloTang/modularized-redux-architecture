@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import c from '../../common/actions-names';
 import {nameSpace} from '../../config';
 
@@ -11,8 +12,7 @@ const user_EditOrCreate = {
   draftInit (_userId) {
     return (dispatch, getState) => {
       dispatch({
-        type: c[`${nameSpace}__user_editOrCreate_draft_open`],
-        payload: { userId: _userId }
+        type: c[`${nameSpace}__user_editOrCreate_draft_open`]
       });
 
       const userId = _userId;
@@ -25,7 +25,7 @@ const user_EditOrCreate = {
       };
 
       if (userId) {
-        API.users.getOne(userId).then(
+        return API.users.getOne(userId).then(
           user => {
             if ( user.hasOwnProperty('httpError')) {
               const httpError = user.httpError;
@@ -59,10 +59,14 @@ const user_EditOrCreate = {
         // -- prepare initial draft for create -- //
         const draft = { ...draft_default };
 
-        dispatch({
-          type: c[`${nameSpace}__user_editOrCreate_draft_initDefault`],
-          payload: { userId, draft }
-        });
+        return Promise.resolve().then(
+          ()=>{
+            dispatch({
+              type: c[`${nameSpace}__user_editOrCreate_draft_initDefault`],
+              payload: { userId, draft }
+            });
+          }
+        );
       }
     }
   },

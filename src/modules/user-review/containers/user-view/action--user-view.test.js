@@ -67,7 +67,7 @@ describe( `
           {"type": c[`${nameSpace}__userView_fetch_fail`], "payload": { httpError:{} }   }
         ];
 
-        const store = mockStore({ todos: [] })
+        const store = mockStore({})
 
         return store.dispatch(actions.fetchUser(userId))
           .then((arg) => {
@@ -104,7 +104,7 @@ describe( `
           {"type": '@@router/CALL_HISTORY_METHOD', "payload": {"args": ["/users"], "method": "push"}   }
         ];
 
-        const store = mockStore({ todos: [] })
+        const store = mockStore({})
 
         return store.dispatch(actions.deleteUser(userId))
           .then((arg) => {
