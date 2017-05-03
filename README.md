@@ -6,7 +6,7 @@
   modular architecture (everything is a module)
 
 ### Front End Stack
-  webpack 2, react-router 4, react, redux, yarn
+  react, redux, react-router-4, connected-react-router, webpack-2, yarn
 
 ### Styling:
   less, modular-css
