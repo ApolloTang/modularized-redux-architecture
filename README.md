@@ -1,9 +1,9 @@
 ## web-app-demo--client--react-redux
 
-
+  To be used with: https://github.com/ApolloTang/web-app-demo--api
 
 ### Feature:
-  modular architecture (every thing is a module)
+  modular architecture (everything is a module)
 
 ### Front End Stack
   webpack 2, react-router 4, react, redux, yarn
@@ -14,19 +14,20 @@
 ### Development tool
   * React Developer Tools 
       * https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-  * redux-devtools-extension [link
+  * redux-devtools-extension
       * https://github.com/zalmoxisus/redux-devtools-extension
 
 
 ### Testing:
-  * Test Framework: *Jest*
+  * Test Framework: **Jest**
       * https://facebook.github.io/jest/
-  * Testing utility: *Enzyme*
+  * Testing utility: **Enzyme**
       * http://airbnb.io/enzyme/
-  * Mock server: *Nock*
+  * Mock server: **Nock**
       * https://github.com/node-nock/nock
-  * Mock redux: *redux mock store*
+  * Mock redux: **redux mock store**
       * https://github.com/arnaudbenard/redux-mock-store
+
 
 
 ### Install dependency:
