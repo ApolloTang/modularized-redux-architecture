@@ -1,7 +1,7 @@
 {
-  "name": "React-Project-Setup",
+  "name": "web-app-demo--client--react-redux",
   "version": "1.0.0",
-  "description": "",
+  "description": "Rect/Redux project setup",
   "main": "webpack.config.js",
   "scripts": {
     "test": "jest --verbose --watch",
@@ -18,9 +18,13 @@
     "clean": "rimraf dist",
     "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug"
   },
-  "keywords": [],
-  "author": "Apollo Tang",
-  "license": "ISC",
+  "keywords": ["react", "redux", "set-up"],
+  "author": "Apollo Tang <tang.apollo@gmail.com>",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "web-app-demo--client--react-redux"
+  },
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
