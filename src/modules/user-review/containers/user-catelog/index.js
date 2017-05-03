@@ -59,7 +59,6 @@ class UserCatalog extends React.Component {
         <UserList
           id_selectedUser={userIdInParam}
           userCatelog={this.props.userCatelog}
-          selectUser = {this.handle_selectUser}
         />
       </div>
     )

@@ -4,8 +4,7 @@ const userCatlog = [
   'userCatelog_init',
   `userCatelog_fetch_begin`,
   'userCatelog_fetch_success',
-  'userCatelog_fetch_fail',
-  'userCatelog_selectUser',
+  'userCatelog_fetch_fail'
 ];
 
 import userView from '../containers/user-view/action-names';

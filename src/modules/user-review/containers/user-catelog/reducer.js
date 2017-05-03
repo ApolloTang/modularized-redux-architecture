@@ -5,7 +5,6 @@ import {combineReducers} from 'redux';
 
 const initialState = {
   isLoading: true,
-  id_selectedUser: void 0,
   httpError: null,
   ids_userCatelog: []
 }
@@ -45,15 +44,6 @@ const userCatelog = (state = {...initialState}, action) => {
         ...state,
         isLoading: false,
         httpError: payload.error
-      };
-      return state_next;
-    }
-    case c[`${nameSpace}__userCatelog_selectUser`] : {
-      const payload = action.payload;
-      const state_prev = {...state};
-      const state_next = {
-        ...state,
-        id_selectedUser: payload.userId
       };
       return state_next;
     }

@@ -10,7 +10,7 @@ import SimpleNavigation from 'widgets/simple-navigation';
 class FunctionNavigation extends React.Component {
 
   render() {
-    const id_selectedUser = this.props.id_selectedUser ; // this is read from session.userCatelog
+    const id_selectedUser = this.props.match.params.userId
 
     let navigationDirective = [
       {to:'/users/new', displayText:'Add User'},

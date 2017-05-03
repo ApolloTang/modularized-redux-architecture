@@ -6,18 +6,15 @@ const mapStoreToProps = store=>{
   const userCatelog = _.get(store, `modules.${nameSpace}.resources.userCatelog`, null);
   const isLoading = _.get(store, `modules.${nameSpace}.session.userCatelog.isLoading`, true);
   const ids_userCatelog = _.get(store, `modules.${nameSpace}.session.userCatelog.ids_userCatelog`, void 0);
-  const id_selectedUser = _.get(store, `modules.${nameSpace}.session.userCatelog.id_selectedUser`, void 0);
   return {
     userCatelog,
     isLoading,
-    ids_userCatelog,
-    id_selectedUser
+    ids_userCatelog
   }
 };
 
 const mapDispatchToProps = dispatch => ({
   dispatch_init() { dispatch(Action.init() ) },
-  dispatch_selectUser(userId) { dispatch(Action.selectUser(userId) ) },
   dispatch_fetchUserCatelog() { dispatch(Action.fetchUserCatelog() ) },
   dispatch_someAction() { dispatch( Action_someAction() ); }
 });

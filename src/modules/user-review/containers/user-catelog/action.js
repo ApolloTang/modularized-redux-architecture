@@ -48,15 +48,6 @@ const userCatelog = {
       );
     }
   },
-
-  selectUser(userId) {
-    return (dispatch, getState) => {
-      dispatch({
-        type: c[`${nameSpace}__userCatelog_selectUser`],
-        payload: {userId}
-      });
-    }
-  }
 }
 
 export default userCatelog;
