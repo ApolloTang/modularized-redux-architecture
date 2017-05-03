@@ -1,12 +1,6 @@
 import {nameSpace} from  '../config';
 
-const userCatlog = [
-  'userCatelog_init',
-  `userCatelog_fetch_begin`,
-  'userCatelog_fetch_success',
-  'userCatelog_fetch_fail'
-];
-
+import userCatlog from '../containers/user-catelog/action-names';
 import userView from '../containers/user-view/action-names';
 import userEditOrCreate from '../containers/user-edit-create/action-names';
 
