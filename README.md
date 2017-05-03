@@ -14,18 +14,18 @@
 ### Development tool
   * React Developer Tools 
       * https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-  * redux-devtools-extension [link
+  * redux-devtools-extension
       * https://github.com/zalmoxisus/redux-devtools-extension
 
 
 ### Testing:
-  * Test Framework: *Jest*
+  * Test Framework: **Jest**
       * https://facebook.github.io/jest/
-  * Testing utility: *Enzyme*
+  * Testing utility: **Enzyme**
       * http://airbnb.io/enzyme/
-  * Mock server: *Nock*
+  * Mock server: **Nock**
       * https://github.com/node-nock/nock
-  * Mock redux: *redux mock store*
+  * Mock redux: **redux mock store**
       * https://github.com/arnaudbenard/redux-mock-store
 
 
