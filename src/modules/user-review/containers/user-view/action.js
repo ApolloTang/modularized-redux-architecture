@@ -42,7 +42,7 @@ const userView = {
           if (!TEST && !PROD) {
             // simulate delay
             setTimeout( ()=>{ worker_apiUserGetOne(user); }, 1000);
-          } else if (TEST) {
+          } else if (TEST || PROD) {
              worker_apiUserGetOne(user);
           }
         },

@@ -31,7 +31,7 @@ const userCatelog = {
                 payload: { ids_userCatelog }
               });
             },1000);
-          } else if (TEST) {
+          } else if (TEST || PROD) {
               dispatch({
                 type: c[`${nameSpace}__userCatelog_fetch_success`],
                 payload: { ids_userCatelog }
