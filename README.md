@@ -1,6 +1,6 @@
 ## web-app-demo--client--react-redux
 
-
+  To be use with: https://github.com/ApolloTang/web-app-demo--api
 
 ### Feature:
   modular architecture (every thing is a module)
@@ -27,6 +27,7 @@
       * https://github.com/node-nock/nock
   * Mock redux: *redux mock store*
       * https://github.com/arnaudbenard/redux-mock-store
+
 
 
 ### Install dependency:
