@@ -1,9 +1,9 @@
 ## web-app-demo--client--react-redux
 
-  To be use with: https://github.com/ApolloTang/web-app-demo--api
+  To be used with: https://github.com/ApolloTang/web-app-demo--api
 
 ### Feature:
-  modular architecture (every thing is a module)
+  modular architecture (everything is a module)
 
 ### Front End Stack
   webpack 2, react-router 4, react, redux, yarn
