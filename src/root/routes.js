@@ -12,9 +12,7 @@ import UserReview from 'modules/user-review';
 
 const navigationDirective = [
     {to:'/', displayText:'Home'},
-    {to:'/users', displayText:'User'},
-    {to:'/users/1', displayText:'User 1'},
-    {to:'/users/1/view-review/2', displayText:'User 1 view user 2'},
+    {to:'/users', displayText:'Paytm employer review'},
     {to:'/font-test', displayText:'Font test'},
     {to:'/lazy-load', displayText:'Lazy load'},
     {to:'/todos/all', displayText:'Todo'},
@@ -25,9 +23,9 @@ const navigationDirective = [
 
 const routes = (
   <Switch>
-    {/* <Route exact path="/" component={()=>(<div>home</div>)} /> */}
+    <Route exact path="/" component={()=>(<div>home</div>)} />
     {/* <Route exact path="/" render={()=>( <Redirect to="/todos/all"/>)} /> */}
-    <Route exact path="/" render={()=>( <Redirect to="/users"/>)} />
+    {/* <Route exact path="/" render={()=>( <Redirect to="/users"/>)} /> */}
     <Route path="/users/:userId" component={UserReview} />
     <Route exact path="/users/new" component={UserReview} />
     <Route path="/users" component={UserReview} />
