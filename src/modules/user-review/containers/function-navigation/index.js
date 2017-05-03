@@ -7,6 +7,7 @@ import {mapStoreToProps, mapDispatchToProps} from './selector';
 
 import SimpleNavigation from 'widgets/simple-navigation';
 
+import style from  './style';
 class FunctionNavigation extends React.Component {
 
   render() {
@@ -22,21 +23,15 @@ class FunctionNavigation extends React.Component {
 
     const url = this.props.match.url;
     const isCreate = /^\/users\/new\/?$/i.test(url);
+    const noUser = /^\/users\/?$/i.test(url);
 
-    if (isCreate) {
+    if (isCreate || noUser) {
       navigationDirective = [
         {to:'/users/new', displayText:'Add User'},
       ];
     }
-
-    const noUser = /^\/users\/?$/i.test(url);
-
-    if (noUser) {
-      navigationDirective = [ ];
-    }
-
     return(
-      <div>
+      <div className={`function-navigation ${style['module-style']}`}>
         <SimpleNavigation navigations={navigationDirective}/>
       </div>
     )

@@ -3,27 +3,61 @@
 @import "~common/styles-init/index";
 
 :local(.module-style) {
-    height: 100%;
+    @w-left-pannel: 150px;
+    @w-gut: 10px;
+    height: 400px;
     .mixin-module-style(#eee);
     .leftPannel {
       .oban-clearfix();
+      border: 1px solid #ddd;
+      background: #fff;
+      height: 100%;
       float: left;
-      width: 100px;
-
+      width: @w-left-pannel;
+      overflow-y: auto;
+      .scroll-content {
+        padding: 5px;
+      }
+    }
+    .gut {
+      float:left;
+      height: 100%;
+      width: @w-gut;
     }
     .rightPannel {
+      @h-gut : 10px;
+      @h-head : 45px;
+      @h-head-n-gut: @h-gut + @h-head;
       .oban-clearfix();
       height: 100%;
       float: left;
-      width: calc( ~"100% - 100px" );
+      @right: @w-gut + @w-left-pannel;
+      width: calc( ~"100% - "@right );
         .head {
-          .oban-clearfix();
-          height: 50px;
+          overflow: hidden;
+          height: @h-head;
           width: 100%;
+          border: 1px solid #ddd;
+          background: #fff;
+          padding: 5px;
+          .head-content {
+             width: 2000px;
+          }
+        }
+        .h-gut {
+          width: 100%;
+          height: @h-gut;
         }
         .body {
-          .oban-clearfix();
-          height: calc( ~"100% - 50px")
+          overflow: hidden;
+          height: @h-head;
+          padding: 5px;
+          border: 1px solid #ddd;
+          background: #fff;
+          height: calc( ~"100% - "@h-head-n-gut);
+          .body-content {
+             width: 2000px;
+          }
         }
     }
 }

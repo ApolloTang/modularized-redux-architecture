@@ -9,7 +9,7 @@ class Layout extends Component {
     }
     render() {
         return (
-            <div className={`langindPage ${style['module-style']}`} >
+            <div className={`landingPage ${style['module-style']}`} >
               Please select a user
             </div>
         );

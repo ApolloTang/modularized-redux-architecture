@@ -9,11 +9,20 @@ class Layout extends Component {
     }
     render() {
         return (
-            <div className={`layout ${style['module-style']}`} >
-              <div className="leftPannel">{this.props.UserCatelog}</div>
+            <div className={`userReview_layout ${style['module-style']}`} >
+              <div className="leftPannel">
+                <div className="scroll-content">{this.props.UserCatelog}</div>
+              </div>
+              <div className="gut"/>
               <div className="rightPannel">
-                <div className="head">{this.props.FunctionNavigation}</div>
-                <div className="body">{this.props.routes}</div>
+
+                <div className="head">
+                  <div className="head-content">{this.props.FunctionNavigation}</div>
+                </div>
+                <div className="h-gut" />
+                <div className="body">
+                  <div className="body-content">{this.props.routes}</div>
+                </div>
               </div>
             </div>
         );
