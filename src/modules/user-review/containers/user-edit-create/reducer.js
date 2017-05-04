@@ -28,9 +28,9 @@ const user_EditOrCreate = (state = {...initialState}, action) => {
     }
     case c[`${nameSpace}__user_editOrCreate_draft_initDefault`]: {
       const state_prev = state;
-      const state_prev_cloned = _.cloneDeep(state_prev); // clone b/c never mutate previous state
+      const state_prev_clone = _.cloneDeep(state_prev); // clone b/c never mutate previous state
 
-      const draft_prev = _.get(state_prev_cloned, `draft`, null); // extract draft
+      const draft_prev = _.get(state_prev_clone, `draft`, null); // extract draft
       let draft_next;
 
       if ( draft_prev === null ) {
@@ -39,6 +39,8 @@ const user_EditOrCreate = (state = {...initialState}, action) => {
         draft_next = _.cloneDeep(   // should definitely clone this b/c you want keep the default for next draft
           _.get(action, 'payload.draft', {})
         );
+      } else {
+        draft_next = state_prev_clone.draft;
       }
 
       // const meta={}; // <-- addition info for validation
@@ -46,7 +48,7 @@ const user_EditOrCreate = (state = {...initialState}, action) => {
       const draftErrors = [];
 
       return { // return next state
-        ...state_prev_cloned,
+        ...state_prev_clone,
         draft: draft_next,
         isLoading: false,
         draftErrors,

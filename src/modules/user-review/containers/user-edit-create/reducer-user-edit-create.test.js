@@ -116,15 +116,72 @@ describe(`
       showErrors: false   // hide any error until user submit
     };
 
-    test('DEV 000000000000000000 reducer out:', ()=>{
-      expect( userEditCreate(state_prev, action)).toBe({stateB4: state_prev, initialState, act:action});
-    });
+    // test('DEV 000000000000000000 reducer out:', ()=>{
+    //   expect( userEditCreate(state_prev, action)).toBe({stateB4: state_prev, initialState, act:action});
+    // });
 
-    test(`it should initialize the draft because the draft was previously null`, ()=>{
+    test(`it should initialize with values of draft from payload b/c the draft was previously null)`, ()=>{
+      expect( userEditCreate(state_prev, action).draft ).not.toEqual(state_next.draft);
+    });
+    test(`initilized draft is a clone of draft in payload (no mutation)`, ()=>{
+      expect( userEditCreate(state_prev, action).draft ).not.toBe(state_next.draft);
+    });
+    test(`should have done loading by now`, ()=>{
+      expect( userEditCreate(state_prev, action).isLoading ).toBe(false);
+    });
+    test(`should hide errors`, ()=>{
+      expect( userEditCreate(state_prev, action).showErrors ).toBe(false);
+    });
+    test(`draftError should be an array`, ()=>{
+      const expected_draftError = userEditCreate(state_prev, action).draftErrors;
+      const isArray = _.isArray(expected_draftError);
+      expect( isArray ).toBe(true);
+      if (isArray) {
+        test(`draftError should be an array of length zero or greater`, ()=>{
+            expect( expected_draftError.length >= 0 ).toBe(true);
+        });
+      }
+    });
+    test(`draftError should be an array of length zero or greater`, ()=>{
+      const expected_draftError = userEditCreate(state_prev, action).draftErrors;
+      const isArray = _.isArray(expected_draftError);
+      if (isArray) {
+            expect( expected_draftError.length >= 0 ).toBe(true);
+      }
+    });
+  });
+
+
+  describe(':::: c[`${nameSpace}__user_editOrCreate_draft_initDefault`] with draft !== null', () => {
+    const state_prev = {
+      anything: 'anything',
+      draft: {data: 'dart already initialized'}
+    };
+    const action = {
+      type: c[`${nameSpace}__user_editOrCreate_draft_initDefault`],
+      payload: {
+        draft:{
+          data:'some data to initializied draft'
+        }
+      }
+    };
+    const state_next = {
+        ...state_prev,
+      draft: state_prev.draft,  // draft is the same as previous
+      isLoading: false,   // should done loading by now
+      draftErrors: [],    // must be type array with length >= 0
+      showErrors: false   // hide any error until user submit
+    };
+
+    // test('DEV 000000000000000000 reducer out:', ()=>{
+    //   expect( userEditCreate(state_prev, action)).toBe({stateB4: state_prev, initialState, act:action});
+    // });
+
+    test(`it should not initialize the draft because the draft has been populated`, ()=>{
       expect( userEditCreate(state_prev, action).draft ).not.toBeNull();
     });
-    test(`draft is deeply equal to draft in payload (values preserved)`, ()=>{
-      expect( userEditCreate(state_prev, action).draft ).not.toEqual(state_next.draft);
+    test(`draft is deeply equal to draft in previous state (values preserved)`, ()=>{
+      expect( userEditCreate(state_prev, action).draft ).toEqual(state_prev.draft);
     });
     test(`initilized draft is a clone of draft in payload`, ()=>{
       expect( userEditCreate(state_prev, action).draft ).not.toBe(state_next.draft);
@@ -153,7 +210,6 @@ describe(`
       }
     });
   });
-
   // describe(':::: c[`${nameSpace}__userView_init`], reducer should maintain purity', () => {
   //   const state_prev = {
   //     anything: 'anything'
