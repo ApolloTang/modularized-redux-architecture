@@ -113,8 +113,9 @@ const user_EditOrCreate = (state = {...initialState}, action) => {
       };
     }
     default:
-      return {...state};
+      return state;
   }
 };
 
 export default user_EditOrCreate;
+export {initialState};
