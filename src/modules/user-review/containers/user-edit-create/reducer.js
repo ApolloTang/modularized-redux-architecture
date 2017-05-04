@@ -27,23 +27,30 @@ const user_EditOrCreate = (state = {...initialState}, action) => {
       };
     }
     case c[`${nameSpace}__user_editOrCreate_draft_initDefault`]: {
-      const draft_prev = _.get(state, `draft`, null);
-      let draft_next = _.cloneDeep(draft_prev);
+      const state_prev = state;
+      const state_prev_cloned = _.cloneDeep(state_prev); // clone b/c never mutate previous state
+
+      const draft_prev = _.get(state_prev_cloned, `draft`, null); // extract draft
+      let draft_next;
+
       if ( draft_prev === null ) {
-          // Only inititialize draft with default values if there isn't already one.
-          // This is to prevent router reruning trigger initialization of form.
-          draft_next = _.get(action, 'payload.draft', {});
+        // Only inititialize draft with default values if there isn't already one.
+        // This is to prevent router reruning trigger initialization of form.
+        draft_next = _.cloneDeep(   // should definitely clone this b/c you want keep the default for next draft
+          _.get(action, 'payload.draft', {})
+        );
       }
 
       // const meta={}; // <-- addition info for validation
       // const draftErrors = validateDraft(draft_next, meta); // @TODO validation not impliment
       const draftErrors = [];
 
-      return {
-        ...state,
+      return { // return next state
+        ...state_prev_cloned,
         draft: draft_next,
         isLoading: false,
         draftErrors,
+        showErrors: false // upon initialize validate it immediate but not showing untill submit
       };
     }
     case c[`${nameSpace}__user_editOrCreate_draft_initDefault_fail`]: {
