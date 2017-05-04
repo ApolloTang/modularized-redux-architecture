@@ -4,7 +4,7 @@
   "description": "Rect/Redux project setup",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "jest --verbose --watch",
+    "test": "jest --verbose --watch --no-cache",
     "start": "yarn run build && node server.js",
     "dev": "webpack-dev-server --env.dev --no-info",
     "dev:info": "webpack-dev-server --env.dev",
