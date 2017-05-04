@@ -14,7 +14,7 @@ const userView = (state = {...initialState}, action) => {
       return {...state}
     }
     case c[`${nameSpace}__userView_init`]: {
-      return { ...state, }
+      return { ...state }
       }
     case c[`${nameSpace}__userView_fetch_begin`]: {
       const state_prev = {...state};
@@ -43,9 +43,10 @@ const userView = (state = {...initialState}, action) => {
       return state_next;
     }
     default: {
-      return state
+      return state;
     }
   }
 }
 
 export default userView;
+export {initialState};
