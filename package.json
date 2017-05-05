@@ -16,7 +16,7 @@
     "prebuild:debug": "rimraf dist",
     "prebuild:json": "rimraf dist",
     "clean": "rimraf dist",
-    "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug"
+    "debug": "node-nightly --inspect-brk node_modules/.bin/webpack --env.debug"
   },
   "keywords": ["react", "redux", "set-up"],
   "author": "Apollo Tang <tang.apollo@gmail.com>",
