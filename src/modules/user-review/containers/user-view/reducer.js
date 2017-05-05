@@ -20,6 +20,7 @@ const userView = (state = {...initialState}, action) => {
       const state_prev = {...state};
       const state_next = {
         ...state,
+        httpError: null,
         isLoading: true
       };
       return state_next;

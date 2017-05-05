@@ -100,17 +100,16 @@ describe(`
       type: c[`${nameSpace}__userView_fetch_begin`],
       payload: {}
     };
-    const state_next = {
-      ...state_prev,
-      isLoading: true
-    };
 
     // test('DEV 000000000000000000 reducer out:', ()=>{
     //   expect( userView(state_prev, action)).toBe({state_next, action});
     // });
 
     test('isLoading should be set to true', ()=>{
-      expect( userView(state_prev, action)).toEqual(state_next);
+      expect( userView(state_prev, action).isLoading).toBe(true);
+    });
+    test('isLoading should be set to true', ()=>{
+      expect( userView(state_prev, action).httpError).toBeNull();
     });
   });
 

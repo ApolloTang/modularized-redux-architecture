@@ -75,14 +75,15 @@ class UserView extends React.Component {
     }
 
     const httpError  = _.get(this.props, `httpError`, void 0);
-    // console.log('xxxxxx userview: httpError: ', httpError)
     const httpError_status  = _.get(this.props, `httpError.status`, void 0);
 
     if (httpError_status === 404) {
       return(
         <div className={`userView ${style['module-style']}`} >
-          <div> This use does not exist, please select another user.  </div>
-          <div> Error: [404] Resourse not found</div>
+          <div>
+            <div> This use does not exist, please select another user.  </div>
+            <div> Error: [404] Resourse not found</div>
+          </div>
         </div>
       );
     } else if (httpError) {
