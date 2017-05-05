@@ -35,7 +35,7 @@ describe(`
           .reply(200, user)
         const expectedActions = [
           { 'type': c[`${nameSpace}__user_editOrCreate_draft_open`]},
-          { 'type': c[`${nameSpace}__user_editOrCreate_draft_initDefault`], 'payload': {'draft': {'name': 'kkk'}} }
+          { 'type': c[`${nameSpace}__user_editOrCreate_draft_initDefault`], 'payload': {'draft': {'name': 'kkk'}, 'userId': user._id} }
         ];
         const store = mockStore({});
         return store.dispatch(actions.draftInit(userId))

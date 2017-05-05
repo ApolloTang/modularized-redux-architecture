@@ -95,7 +95,7 @@ describe(`
   });
 
 
-  describe(':::: c[`${nameSpace}__user_editOrCreate_draft_initDefault`] with draft === null', () => {
+  describe(':::: c[`${nameSpace}__user_editOrCreate_draft_initDefault`] where draft_b4 === null', () => {
     const state_prev = {
       anything: 'anything',
       draft: null
@@ -108,7 +108,7 @@ describe(`
         }
       }
     };
-    const state_next = {
+    const state_next_expected = {
         ...state_prev,
       draft: _.cloneDeep(action.payload.draft.data),  // done mutate initial value in service
       isLoading: false,   // should done loading by now
@@ -121,10 +121,10 @@ describe(`
     // });
 
     test(`it should initialize with values of draft from payload b/c the draft was previously null)`, ()=>{
-      expect( userEditCreate(state_prev, action).draft ).not.toEqual(state_next.draft);
+      expect( userEditCreate(state_prev, action).draft ).not.toEqual(state_next_expected.draft);
     });
     test(`initilized draft is a clone of draft in payload (no mutation)`, ()=>{
-      expect( userEditCreate(state_prev, action).draft ).not.toBe(state_next.draft);
+      expect( userEditCreate(state_prev, action).draft ).not.toBe(state_next_expected.draft);
     });
     test(`should have done loading by now`, ()=>{
       expect( userEditCreate(state_prev, action).isLoading ).toBe(false);
@@ -152,7 +152,7 @@ describe(`
   });
 
 
-  describe(':::: c[`${nameSpace}__user_editOrCreate_draft_initDefault`] with draft !== null', () => {
+  describe(':::: c[`${nameSpace}__user_editOrCreate_draft_initDefault`] where draft_B4 !== null', () => {
     const state_prev = {
       anything: 'anything',
       draft: {data: 'dart already initialized'}
@@ -165,7 +165,7 @@ describe(`
         }
       }
     };
-    const state_next = {
+    const state_next_expected = {
         ...state_prev,
       draft: state_prev.draft,  // draft is the same as previous
       isLoading: false,   // should done loading by now
@@ -177,14 +177,11 @@ describe(`
     //   expect( userEditCreate(state_prev, action)).toBe({stateB4: state_prev, initialState, act:action});
     // });
 
-    test(`it should not initialize the draft because the draft has been populated`, ()=>{
-      expect( userEditCreate(state_prev, action).draft ).not.toBeNull();
-    });
-    test(`draft is deeply equal to draft in previous state (values preserved)`, ()=>{
+    test(`it should not initialize the draft because the draft has been populated and has the value of previouw draft`, ()=>{
       expect( userEditCreate(state_prev, action).draft ).toEqual(state_prev.draft);
     });
-    test(`initilized draft is a clone of draft in payload`, ()=>{
-      expect( userEditCreate(state_prev, action).draft ).not.toBe(state_next.draft);
+    test(`initilized draft is a clone of previous draft`, ()=>{
+      expect( userEditCreate(state_prev, action).draft ).not.toBe(state_prev.draft);
     });
     test(`should have done loading by now`, ()=>{
       expect( userEditCreate(state_prev, action).isLoading ).toBe(false);
@@ -210,94 +207,64 @@ describe(`
       }
     });
   });
-  // describe(':::: c[`${nameSpace}__userView_init`], reducer should maintain purity', () => {
-  //   const state_prev = {
-  //     anything: 'anything'
-  //   };
-  //   const action = {
-  //     type: c[`${nameSpace}__userView_init`],
-  //     payload: {}
-  //   };
-  //   const state_next = _.cloneDeep(state_prev);
-  //
-  //   // test('DEV 000000000000000000 reducer out:', ()=>{
-  //   //   expect( userView(stateBefore, action)).toBe({stateB4: stateBefore, initialState, act:action});
-  //   // });
-  //
-  //   test('it should not return an object of the same reference', ()=>{
-  //     expect( userView(state_prev, action)).not.toBe(state_next);
-  //   });
-  //
-  //   test('it should not mutate previous state (value is preserved)', ()=>{
-  //     expect( userView(state_prev, action) ).toEqual( state_next );
-  //   });
-  // });
-  //
-  // describe(':::: c[`${nameSpace}__userView_fetch_begin`]', () => {
-  //   const state_prev = {
-  //     anything: 'anything'
-  //   };
-  //   const action = {
-  //     type: c[`${nameSpace}__userView_fetch_begin`],
-  //     payload: {}
-  //   };
-  //   const state_next = {
-  //     ...state_prev,
-  //     isLoading: true
-  //   };
-  //
-  //   // test('DEV 000000000000000000 reducer out:', ()=>{
-  //   //   expect( userView(state_prev, action)).toBe({state_next, action});
-  //   // });
-  //
-  //   test('isLoading should be set to true', ()=>{
-  //     expect( userView(state_prev, action)).toEqual(state_next);
-  //   });
-  // });
-  //
-  // describe(':::: c[`${nameSpace}__userView_fetch_success`]', () => {
-  //   const state_prev = {
-  //     anything: 'anything'
-  //   };
-  //   const action = {
-  //     type: c[`${nameSpace}__userView_fetch_success`],
-  //     payload: {}
-  //   };
-  //   const state_next = {
-  //     ...state_prev,
-  //     isLoading: false
-  //   };
-  //
-  //   // test('DEV 000000000000000000 reducer out:', ()=>{
-  //   //   expect( userView(state_prev, action)).toBe({state_next, action});
-  //   // });
-  //
-  //   test('isLoading should be set to false', ()=>{
-  //     expect( userView(state_prev, action)).toEqual(state_next);
-  //   });
-  // });
-  //
-  //
-  // describe(':::: c[`${nameSpace}__userView_fetch_fail`]', () => {
-  //   const state_prev = {
-  //     anything: 'anything'
-  //   };
-  //   const action = {
-  //     type: c[`${nameSpace}__userView_fetch_fail`],
-  //     payload: {httpError: 'some error'}
-  //   };
-  //   const state_next = {
-  //     ...state_prev,
-  //     isLoading: false,
-  //     httpError: action.payload.httpError
-  //   };
-  //
-  //   // test('DEV 000000000000000000 reducer out:', ()=>{
-  //   //   expect( userView(state_prev, action)).toBe({state_next, action});
-  //   // });
-  //
-  //   test('isLoading should be set to false, and httpError from payload is present in state', ()=>{
-  //     expect( userView(state_prev, action)).toEqual(state_next);
-  //   });
-  // });
+
+
+  describe(':::: ${nameSpace}__user_editOrCreate_draft_initDefault_fail', () => {
+    const state_prev = {
+      anything: 'anything',
+      draft: null
+    };
+    const action = {
+      type: c[`${nameSpace}__user_editOrCreate_draft_initDefault_fail`],
+      payload: {
+        httpError: 'http error',
+        userId: 'can be undefined or an userId'
+      }
+    };
+
+    // test('DEV 000000000000000000 reducer out:', ()=>{
+    //   expect( userEditCreate(state_prev, action)).toBe({stateB4: state_prev, initialState, act:action});
+    // });
+
+    test(`it should not initialize the draft`, ()=>{
+      expect( userEditCreate(state_prev, action).draft ).toBeNull();
+    });
+    test(`should have done loading by now`, ()=>{
+      expect( userEditCreate(state_prev, action).isLoading ).toBe(false);
+    });
+    test(`payload should contain httpError or error property or both`, ()=>{
+      const state_next_expected = userEditCreate(state_prev, action);
+      const hasError
+        = state_next_expected.hasOwnProperty('httpError')
+        || state_next_expected.hasOwnProperty('error');
+      expect( hasError ).toBe(true);
+    });
+  });
+
+  describe(':::: ${nameSpace}__user_editOrCreate_draft_changed ', () => {
+    const state_prev = {
+      anything: 'anything',
+      draft: { someField: 'value before'}
+    };
+    const action = {
+      type: c[`${nameSpace}__user_editOrCreate_draft_changed`],
+      payload: {
+        data: {someField: 'value after'}
+      }
+    };
+
+    // test('DEV 000000000000000000 reducer out:', ()=>{
+    //   expect( userEditCreate(state_prev, action)).toBe({stateB4: state_prev, initialState, act:action});
+    // });
+
+    test(`it should update draft`, ()=>{
+      const draft_prev = state_prev.draft;
+      const dataInPayload = action.payload.data;
+      const draft_next_expected = {
+        ...draft_prev,
+        ...dataInPayload
+      }
+      expect( userEditCreate(state_prev, action).draft).toEqual(draft_next_expected);
+    });
+  });
 });

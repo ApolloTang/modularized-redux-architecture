@@ -31,7 +31,7 @@ const user_EditOrCreate = {
               const httpError = user.httpError;
               dispatch({
                 type: c[`${nameSpace}__user_editOrCreate_draft_initDefault_fail`],
-                payload: {httpError}
+                payload: {httpError, userId}
               });
               return {httpError};
             }
@@ -45,7 +45,7 @@ const user_EditOrCreate = {
             };
             dispatch({
               type: c[`${nameSpace}__user_editOrCreate_draft_initDefault`],
-              payload: { draft }
+              payload: { draft, userId }
             });
           },
           err => {
