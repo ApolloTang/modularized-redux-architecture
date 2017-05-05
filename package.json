@@ -23,7 +23,7 @@
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "web-app-demo--client--react-redux"
+    "url": "https://github.com/ApolloTang/web-app-demo--client--react-redux"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
