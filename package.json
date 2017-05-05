@@ -85,8 +85,7 @@
     "testPathIgnorePatterns": [
       "<rootDir>/dist/",
       "<rootDir>/node_modules/",
-      "<rootDir>/src/modules/demo-unit-test-action",
-      "<rootDir>/src/modules/reducer-test"
+      "<rootDir>/src/modules/demo-unit-test-action"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
