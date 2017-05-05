@@ -108,22 +108,31 @@ const user_EditOrCreate = {
       if (userId) {
         return API.users.update(userId, draft).then(
           userEdited => {
-            dispatch({
-              type: c[`${nameSpace}__user_editOrCreate_draft_submit_success`],
-              payload: { userId, user:userEdited }
-            });
-
-            // 1) add this user to resource/user
-               // @TODO
-            // 2) update user catelog so it has this user
-              dispatch(Action_userCatelog.fetchUserCatelog() )
-            // 2) Navigate to view new user
-              dispatch( push(`/users/${userId}`));
-            // 4) Close Draft
+            if ( userEdited.hasOwnProperty('httpError')) {
+              const httpError = user.httpError;
               dispatch({
-                  type: c[`${nameSpace}__user_editOrCreate_draft_close`],
-                  payload: {}
+                type: c[`${nameSpace}__user_editOrCreate_draft_submit_fail`],
+                payload: {httpError, userId}
               });
+              return {httpError};
+            } else {
+              dispatch({
+                type: c[`${nameSpace}__user_editOrCreate_draft_submit_success`],
+                payload: { userId, user:userEdited }
+              });
+
+              // 1) add this user to resource/user
+                 // @TODO
+              // 2) update user catelog so it has this user
+                dispatch(Action_userCatelog.fetchUserCatelog() )
+              // 2) Navigate to view new user
+                dispatch( push(`/users/${userId}`));
+              // 4) Close Draft
+                dispatch({
+                    type: c[`${nameSpace}__user_editOrCreate_draft_close`],
+                    payload: {}
+                });
+            }
           }
         ).catch( err => {
           dispatch({
@@ -134,25 +143,34 @@ const user_EditOrCreate = {
       } else if (!userId) {
         return API.users.create(draft).then(
           newUser => {
-            const userId_new = _.get(newUser, `_id`, '[Error] missing user Id');
-            dispatch({
-              type: c[`${nameSpace}__user_editOrCreate_draft_submit_success`],
-              payload: { userId: userId_new, user:newUser }
-            });
-
-            const newId = newUser._id;
-
-            // 1) add this user to resource/user
-               // @TODO
-            // 2) update user catelog so it has this user
-              dispatch(Action_userCatelog.fetchUserCatelog() )
-            // 2) Navigate to view new user
-              dispatch( push(`/users/${newId}`));
-            // 4) Close Draft
+            if ( newUser.hasOwnProperty('httpError')) {
+              const httpError = user.httpError;
               dispatch({
-                  type: c[`${nameSpace}__user_editOrCreate_draft_close`],
-                  payload: {}
+                type: c[`${nameSpace}__user_editOrCreate_draft_submit_fail`],
+                payload: {httpError, userId}
               });
+              return {httpError};
+            } else {
+              const userId_new = _.get(newUser, `_id`, '[Error] missing user Id');
+              dispatch({
+                type: c[`${nameSpace}__user_editOrCreate_draft_submit_success`],
+                payload: { userId: userId_new, user:newUser }
+              });
+
+              const newId = newUser._id;
+
+              // 1) add this user to resource/user
+                 // @TODO
+              // 2) update user catelog so it has this user
+                dispatch(Action_userCatelog.fetchUserCatelog() )
+              // 2) Navigate to view new user
+                dispatch( push(`/users/${newId}`));
+              // 4) Close Draft
+                dispatch({
+                    type: c[`${nameSpace}__user_editOrCreate_draft_close`],
+                    payload: {}
+                });
+            }
           }
         ).catch( err => {
           dispatch({
