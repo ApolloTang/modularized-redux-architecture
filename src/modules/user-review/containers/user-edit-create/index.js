@@ -7,6 +7,7 @@ import FormField from 'widgets/form-field';
 
 import {mapStoreToProps, mapDispatchToProps} from './selector';
 
+import style from './style.less';
 class UserView extends React.Component {
   constructor(props) {
     super(props);
@@ -55,7 +56,7 @@ class UserView extends React.Component {
   render() {
     if (this.props.isLoading) {
       return(
-        <div>
+        <div className={`userView ${style['module-style']}`} >
           <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
         </div>
       );
@@ -67,16 +68,20 @@ class UserView extends React.Component {
 
     if (httpError_status === 404) {
       return(
-        <div>
-          <div> This use does not exist, please select another user.  </div>
-          <div> Error: [404] Resourse not found</div>
+        <div className={`userView ${style['module-style']}`} >
+          <div>
+            <div> This use does not exist, please select another user.  </div>
+            <div> Error: [404] Resourse not found</div>
+          </div>
         </div>
       );
     } else if (httpError) {
       return(
-        <div>
-          <div>An Error has occured</div>
-          <div>{`Error: ${ JSON.stringify(httpError, null, 4) }`}</div>
+        <div className={`userView ${style['module-style']}`} >
+          <div>
+            <div>An Error has occured</div>
+            <div>{`Error: ${ JSON.stringify(httpError, null, 4) }`}</div>
+          </div>
         </div>
       );
     }
@@ -86,19 +91,21 @@ class UserView extends React.Component {
       const _name = _.get(this.props, `draft.name`, void 0)
       const name = _name ? _name : '';
       return (
-        <div>
-          <div>{userId ? `Edit ${userId}` : 'Create'}</div>
-          <FormField
-            label="Name"
-            errors={[]}
-            showErrors={false}
-            isRequired={false} >
-            <ReduxInput
-              value={name}
-              onChange={this.handle_fieldChange('name')} />
-          </FormField>
-          <button onClick={this.handle_save}>Save</button>
-          <button onClick={this.handle_cancel}>cancel</button>
+        <div className={`userView ${style['module-style']}`} >
+          <div>
+            <div>{userId ? `Edit ${userId}` : 'Create'}</div>
+            <FormField
+              label="Name"
+              errors={[]}
+              showErrors={false}
+              isRequired={false} >
+              <ReduxInput
+                value={name}
+                onChange={this.handle_fieldChange('name')} />
+            </FormField>
+            <button onClick={this.handle_save}>Save</button>
+            <button onClick={this.handle_cancel}>cancel</button>
+          </div>
         </div>
       );
     }

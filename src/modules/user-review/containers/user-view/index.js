@@ -6,6 +6,7 @@ import { Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 import {mapStoreToProps, mapDispatchToProps} from './selector';
 
 
+import style from './style.less';
 class UserView extends React.Component {
   constructor(props) {
     super(props);
@@ -59,7 +60,7 @@ class UserView extends React.Component {
   render() {
     if (this.props.isLoading) {
       return(
-        <div>
+        <div className={`userView ${style['module-style']}`} >
           <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
         </div>
       )
@@ -67,7 +68,9 @@ class UserView extends React.Component {
 
     if (!this._cache.isValid_userId) {
       return(
-        <div> Invalid userId </div>
+        <div className={`userView ${style['module-style']}`} >
+          Invalid userId
+        </div>
       )
     }
 
@@ -77,16 +80,18 @@ class UserView extends React.Component {
 
     if (httpError_status === 404) {
       return(
-        <div>
+        <div className={`userView ${style['module-style']}`} >
           <div> This use does not exist, please select another user.  </div>
           <div> Error: [404] Resourse not found</div>
         </div>
       );
     } else if (httpError) {
       return(
-        <div>
-          <div>An Error has occured</div>
-          <div>{`Error: ${ JSON.stringify(httpError, null, 4) }`}</div>
+        <div className={`userView ${style['module-style']}`} >
+          <div>
+            <div>An Error has occured</div>
+            <div>{`Error: ${ JSON.stringify(httpError, null, 4) }`}</div>
+          </div>
         </div>
       );
     }
@@ -94,10 +99,14 @@ class UserView extends React.Component {
     if (!httpError) {
       const name = _.get(this.props.users, `${this._cache.userId}.name`, void 0);
       return (
-        <div>
-          <div>{`id: ${this._cache.userId}`}</div>
-          <div>{`Name: ${name}`}</div>
-          <button onClick={()=>{ this.handle_deleteUser(this._cache.userId) }}>delete this user</button>
+        <div className={`userView ${style['module-style']}`} >
+          <div>
+            <div>{`id: ${this._cache.userId}`}</div>
+            <div>{`Name: ${name}`}</div>
+            <div>
+              <button onClick={()=>{ this.handle_deleteUser(this._cache.userId) }}>delete this user</button>
+            </div>
+          </div>
         </div>
       )
     }
