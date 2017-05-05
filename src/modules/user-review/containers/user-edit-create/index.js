@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import { Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
@@ -8,7 +9,7 @@ import FormField from 'widgets/form-field';
 import {mapStoreToProps, mapDispatchToProps} from './selector';
 
 import style from './style.less';
-class UserView extends React.Component {
+class UserEditCreate extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,8 +34,7 @@ class UserView extends React.Component {
       const newFormData = {
         [fieldName]: fieldValue
       };
-
-      this.props.dispatch_draftChanged(newFormData);
+      return this.props.dispatch_draftChanged(newFormData);
     };
   }
   _checkUserId(){
@@ -63,7 +63,6 @@ class UserView extends React.Component {
     }
 
     const httpError  = _.get(this.props, `httpError`, void 0);
-    // console.log('xxxxxx edit create: httpError: ', httpError)
     const httpError_status  = _.get(this.props, `httpError.status`, void 0);
 
     if (httpError_status === 404) {
@@ -113,5 +112,6 @@ class UserView extends React.Component {
 
 };
 
-export default connect(mapStoreToProps, mapDispatchToProps)(UserView);
+export default connect(mapStoreToProps, mapDispatchToProps)(UserEditCreate);
+export {UserEditCreate}
 
