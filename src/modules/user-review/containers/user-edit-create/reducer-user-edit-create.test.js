@@ -94,7 +94,6 @@ describe(`
     });
   });
 
-
   describe(':::: c[`${nameSpace}__user_editOrCreate_draft_initDefault`] where draft_b4 === null', () => {
     const state_prev = {
       anything: 'anything',
@@ -150,7 +149,6 @@ describe(`
       }
     });
   });
-
 
   describe(':::: c[`${nameSpace}__user_editOrCreate_draft_initDefault`] where draft_B4 !== null', () => {
     const state_prev = {
@@ -208,7 +206,6 @@ describe(`
     });
   });
 
-
   describe(':::: ${nameSpace}__user_editOrCreate_draft_initDefault_fail', () => {
     const state_prev = {
       anything: 'anything',
@@ -265,6 +262,19 @@ describe(`
         ...dataInPayload
       }
       expect( userEditCreate(state_prev, action).draft).toEqual(draft_next_expected);
+    });
+  });
+
+  describe(':::: ${nameSpace}__user_editOrCreate_draft_saveInitiated ', () => {
+    const state_prev = {
+      anything: 'anything',
+    };
+    const action = {
+      type: c[`${nameSpace}__user_editOrCreate_draft_saveInitiated`],
+    };
+
+    test(`set showError to true`, ()=>{
+      expect( userEditCreate(state_prev, action).showErrors).toBe(true);
     });
   });
 });
