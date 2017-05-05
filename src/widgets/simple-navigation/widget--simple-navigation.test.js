@@ -17,7 +17,12 @@ const navigationDirective = [
 
 const navLenght = navigationDirective.lenght;
 
-describe('\n == <SimpleNavigation /> ==', () => {
+describe(`
+  =============================================
+  ==               Widget Test               ==
+  ==           simple-navigation             ==
+  =============================================
+`, () => {
   it('render <SimpleNavigation /> ', () => {
     const component = shallow(<SimpleNavigation navigations={navigationDirective} />);
     expect(component).toHaveLength(1);

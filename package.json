@@ -18,7 +18,11 @@
     "clean": "rimraf dist",
     "debug": "node-nightly --inspect-brk node_modules/.bin/webpack --env.debug"
   },
-  "keywords": ["react", "redux", "set-up"],
+  "keywords": [
+    "react",
+    "redux",
+    "set-up"
+  ],
   "author": "Apollo Tang <tang.apollo@gmail.com>",
   "license": "BSD-3-Clause",
   "repository": {
@@ -35,6 +39,7 @@
     "babel-preset-stage-2": "^6.22.0",
     "css-loader": "^0.26.1",
     "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.26.0",
