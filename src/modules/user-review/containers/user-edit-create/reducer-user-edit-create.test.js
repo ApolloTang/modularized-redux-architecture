@@ -277,4 +277,62 @@ describe(`
       expect( userEditCreate(state_prev, action).showErrors).toBe(true);
     });
   });
+
+  describe(':::: ${nameSpace}__user_editOrCreate_draft_submit_start ', () => {
+    const state_prev = {
+      anything: 'anything',
+    };
+    const action = {
+      type: c[`${nameSpace}__user_editOrCreate_draft_submit_start`],
+    };
+
+    test(`set showError to true`, ()=>{
+      expect( userEditCreate(state_prev, action).isLoading).toBe(true);
+    });
+  });
+
+  describe(':::: ${nameSpace}__user_editOrCreate_draft_submit_success ', () => {
+    const state_prev = {
+      anything: 'anything',
+    };
+    const action = {
+      type: c[`${nameSpace}__user_editOrCreate_draft_submit_success`],
+    };
+
+    test(`set isLoading to false`, ()=>{
+      expect( userEditCreate(state_prev, action).isLoading).toBe(false);
+    });
+  });
+
+  describe(':::: ${nameSpace}__user_editOrCreate_draft_submit_fail ', () => {
+    const state_prev = {
+      anything: 'anything',
+    };
+    const action = {
+      type: c[`${nameSpace}__user_editOrCreate_draft_submit_fail`],
+      payload: {
+        httpError: 'http error',
+        userId: 'can be undefined or an userId'
+      }
+    };
+    test(`payload should contain httpError or error property or both`, ()=>{
+      const state_next_expected = userEditCreate(state_prev, action);
+      const hasError
+        = state_next_expected.hasOwnProperty('httpError')
+        || state_next_expected.hasOwnProperty('error');
+      expect( hasError ).toBe(true);
+    });
+  });
+
+  describe(':::: ${nameSpace}__user_editOrCreate_draft_close ', () => {
+    const state_prev = {
+      anything: 'anything',
+    };
+    const action = {
+      type: c[`${nameSpace}__user_editOrCreate_draft_close`],
+    };
+    test(`should clear draft by set it to initial state`, ()=>{
+      expect( userEditCreate(state_prev, action) ).toEqual(initialState);
+    });
+  });
 });
