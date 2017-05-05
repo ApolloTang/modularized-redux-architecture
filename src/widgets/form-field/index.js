@@ -47,13 +47,13 @@ class FormField extends React.Component {
   }
 };
 FormField.propTypes = {
-  label: React.PropTypes.string,
-  description: React.PropTypes.string,
-  tooltip: React.PropTypes.object,
-  errors: React.PropTypes.array,
-  showErrors: React.PropTypes.bool,
-  isRequired: React.PropTypes.bool,
-  className: React.PropTypes.string
+  label: PropTypes.string,
+  description: PropTypes.string,
+  tooltip: PropTypes.object,
+  errors: PropTypes.array,
+  showErrors: PropTypes.bool,
+  isRequired:PropTypes.bool,
+  className: PropTypes.string
 };
 
 export default FormField;

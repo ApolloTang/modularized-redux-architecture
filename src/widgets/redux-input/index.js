@@ -109,16 +109,16 @@ class ReduxInput extends React.Component {
   }
 };
 ReduxInput.propTypes = {
-  value: React.PropTypes.any,
-  onChange: React.PropTypes.func,
-  formatIn: React.PropTypes.func,
-  formatOut: React.PropTypes.func,
-  autocorrect: React.PropTypes.func,
-  placeholder: React.PropTypes.string,
-  shouldAllowInput: React.PropTypes.func,
-  id: React.PropTypes.string,
-  type: React.PropTypes.oneOf(['text', 'search', null]),
-  className: React.PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
+  formatIn: PropTypes.func,
+  formatOut: PropTypes.func,
+  autocorrect: PropTypes.func,
+  placeholder: PropTypes.string,
+  shouldAllowInput: PropTypes.func,
+  id: PropTypes.string,
+  type: PropTypes.oneOf(['text', 'search', null]),
+  className: PropTypes.string,
 };
 export default ReduxInput;
 
