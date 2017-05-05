@@ -1,6 +1,7 @@
 import React from 'react';
 import SimpleNavigation from './index';
 import {shallow } from 'enzyme';
+import {shallowToJson } from 'enzyme-to-json';
 
 
 const navigationDirective = [
@@ -23,9 +24,17 @@ describe(`
   ==           simple-navigation             ==
   =============================================
 `, () => {
-  it('render <SimpleNavigation /> ', () => {
+  describe(':::: <SimpleNavigation /> ', () => {
     const component = shallow(<SimpleNavigation navigations={navigationDirective} />);
-    expect(component).toHaveLength(1);
+    const componentJson = shallowToJson(component);
+
+    test(`:::: lenght of children should be one `, () =>{
+      expect(component).toHaveLength(1);
+    });
+
+    test(`:::: snapshot test `, () =>{
+      expect(component).toMatchSnapshot(1);
+    });
   })
 });
 

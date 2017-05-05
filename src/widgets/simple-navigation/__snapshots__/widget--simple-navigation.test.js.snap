@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 1`] = `
+<div
+  className="simple-navigation module-style"
+>
+  <ul>
+    <li>
+      <NavLink
+        activeClassName="is-active"
+        exact={true}
+        to="/"
+      >
+        Home
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="is-active"
+        exact={true}
+        to="/users"
+      >
+        User
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="is-active"
+        exact={true}
+        to="/users/1"
+      >
+        User 1
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="is-active"
+        exact={true}
+        to="/users/1/view-review/2"
+      >
+        User 1 view user 2
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="is-active"
+        exact={true}
+        to="/font-test"
+      >
+        Font test
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="is-active"
+        exact={true}
+        to="/lazy-load"
+      >
+        Lazy load
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="is-active"
+        exact={true}
+        to="/todos/all"
+      >
+        Todo
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="is-active"
+        exact={true}
+        to="/rest"
+      >
+        Rest
+      </NavLink>
+    </li>
+  </ul>
+</div>
+`;
