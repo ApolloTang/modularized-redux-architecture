@@ -32,7 +32,7 @@
 
 ### Install dependency:
   ```
-  yarn install
+  yarn
   ```
   
 ### Development with webpack dev server:
