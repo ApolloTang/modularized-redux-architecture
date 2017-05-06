@@ -8,6 +8,7 @@ import LazyLoad from 'modules/lazy-load';
 import Todos from 'modules/todos';
 import Rest from 'modules/rest-testing';
 import UserReview from 'modules/user-review';
+import Playground from 'modules/playground';
 
 
 const navigationDirective = [
@@ -16,7 +17,8 @@ const navigationDirective = [
     {to:'/font-test', displayText:'Font test'},
     {to:'/lazy-load', displayText:'Lazy load'},
     {to:'/todos/all', displayText:'Todo'},
-    {to:'/rest', displayText:'Rest'}
+    {to:'/rest', displayText:'Rest'},
+    {to:'/playground', displayText:'playground'}
 ];
 
 
@@ -33,6 +35,7 @@ const routes = (
     <Route path="/lazy-load" component={LazyLoad} />
     <Route path="/todos/:filterType" component={Todos} />
     <Route path="/rest" component={Rest} />
+    <Route path="/playground" component={Playground} />
     <Route component={NotFound}/>
   </Switch>
 );
