@@ -15,8 +15,10 @@ const rootUrl = `${api_urlAndPort}/api`;
 
 const out = {
   nameSpace, rootUrl, api_urlAndPort
-}
+};
 console.log('user-review.config: ', out);
 
-export out;
+export {
+  nameSpace, rootUrl, api_urlAndPort
+};
 
