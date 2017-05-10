@@ -26,7 +26,7 @@ class ModuleRoot extends Component {
       // <- ['f', 'o', 'o']
     console.log(Array.from(g))
       // <- ['f', 'o', 'o']
-    console.log('hello');
+    console.log('helxxxxxxxxlo');
   }
   render() {
     return (

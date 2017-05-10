@@ -112,13 +112,21 @@ Get api/reviews/?reviewerId=1234&revieweeId=5678
     respond payload: { review_1 }
 
 
-POST api/reviews/assign
+POST api/reviews/assign-reviewer
     request payload:
     {
       id_reviewee: id_user1,
       ids_reviewer: [ id_user2, id_user3, id_user4, ...]
     }
     respond payload: [ { review_1 }, { review_2 }, {review_3} ... ]
+
+* POST api/reviews/assign-reviewee
+*     request payload:
+*     {
+*       id_reviewer: id_user1,
+*       ids_reviewee: [ id_user2, id_user3, id_user4, ...]
+*     }
+*     respond payload: [ { review_1 }, { review_2 }, {review_3} ... ]
 
 -------------------------------------
 
