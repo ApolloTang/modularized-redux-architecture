@@ -37,7 +37,7 @@
   
 ### Development with webpack dev server:
   ```
-  yarn run dev
+  yarn dev
   ```
   
 ### Development testing
@@ -47,7 +47,7 @@
   
 ### Build for distribution:
   ```
-  yarn run build
+  yarn build
   ```
   
 ### Build and serve:
