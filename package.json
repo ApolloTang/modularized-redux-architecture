@@ -1,6 +1,9 @@
 {
   "name": "web-app-demo--client--react-redux",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.0.0"
+  },
   "description": "Rect/Redux project setup",
   "main": "webpack.config.js",
   "scripts": {
