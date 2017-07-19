@@ -10,7 +10,7 @@
     "test": "jest --verbose --watch",
     "test:nocache": "jest --verbose --watch --no-cache",
     "start": "node server.js",
-    "deploy" : "git push heroku deploy:master",
+    "deploy": "git push heroku deploy:master",
     "dev": "webpack-dev-server --env.dev --no-info",
     "dev:info": "webpack-dev-server --env.dev",
     "dev:debug": "CONSOLE_LOG=true webpack-dev-server --env.dev --no-info --define process.env.debug='true'",
@@ -79,7 +79,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
-    "react-router-config": "1.0.0@latest",
+    "react-router-config": "^1.0.0-beta.3",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0"
