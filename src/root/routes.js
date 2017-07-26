@@ -17,8 +17,6 @@ const navigationDirective = [
     {to:'/font-test', displayText:'Font test'},
     {to:'/lazy-load', displayText:'Lazy load'},
     {to:'/playground', displayText:'playground'}
-    // {to:'/users', displayText:'User review'},
-    // {to:'/rest', displayText:'Rest'},
 ];
 
 
@@ -30,12 +28,6 @@ const routes = (
     <Route path="/lazy-load" component={LazyLoad} />
     <Route path="/todos/:filterType" component={Todos} />
     <Route path="/playground" component={Playground} />
-    {/* <Route exact path="/" render={()=>( <Redirect to="/todos/all"/>)} /> */}
-    {/* <Route exact path="/" render={()=>( <Redirect to="/users"/>)} /> */}
-    {/* <Route path="/users/:userId" component={UserReview} /> */}
-    {/* <Route exact path="/users/new" component={UserReview} /> */}
-    {/* <Route path="/users" component={UserReview} /> */}
-    {/* <Route path="/rest" component={Rest} /> */}
     <Route component={NotFound}/>
   </Switch>
 );
