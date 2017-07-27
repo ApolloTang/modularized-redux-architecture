@@ -6,8 +6,6 @@ import NotFound from 'components/not-found';
 import FontTest from 'modules/font-test';
 import LazyLoad from 'modules/lazy-load';
 import Todos from 'modules/todos';
-import Rest from 'modules/rest-testing';
-import UserReview from 'modules/user-review';
 import Playground from 'modules/playground';
 
 
